@@ -1,6 +1,7 @@
 package com.example.infs3605_group2.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,8 +9,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.infs3605_group2.R;
 import com.google.firebase.database.DataSnapshot;
@@ -57,11 +61,14 @@ public class ParentLanding extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         childBalanceRef = database.getReference("/userInfo/username2/balance");
         parentBalanceRef = database.getReference("/userInfo/username1/balance");
+        Toast.makeText(getActivity(), "in",
+                Toast.LENGTH_SHORT).show();
 
         //will need to code dynamic path with username val
 
         // Read from the database
         childBalanceRef.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -73,7 +80,8 @@ public class ParentLanding extends Fragment {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                System.out.println("error");
+                Toast.makeText(getActivity(), "sorry",
+                        Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -90,20 +98,23 @@ public class ParentLanding extends Fragment {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                System.out.println("error");
-
+                Toast.makeText(getActivity(), "sorry",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideSoftKeyboard();
                 amount = Double.parseDouble(txtAmount.getText().toString());
                 if(validateBalance(parentBalance)){
                     childBalanceRef.setValue(childBalance + amount);
+                    parentBalanceRef.setValue(parentBalance - amount);
                 }
                 else{
-                    System.out.println("mum u need more money");
+                    Toast.makeText(getActivity(), "mum u need more money",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -111,12 +122,15 @@ public class ParentLanding extends Fragment {
         btnRetrieve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideSoftKeyboard();
                 amount = Double.parseDouble(txtAmount.getText().toString());
                 if(validateBalance(childBalance)){
                     childBalanceRef.setValue(childBalance - amount);
+                    parentBalanceRef.setValue(parentBalance + amount);
                 }
                 else{
-                    System.out.println("mum ur kid doesnt have that much");
+                    Toast.makeText(getActivity(), "mum ur kid doesnt even have that much??",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -128,6 +142,13 @@ public class ParentLanding extends Fragment {
         }
         else{
             return false;
+        }
+    }
+    //code ref: https://stackoverflow.com/questions/4005728/hide-default-keyboard-on-click-in-android
+    private void hideSoftKeyboard(){
+        if(getActivity().getCurrentFocus()!=null && getActivity().getCurrentFocus() instanceof EditText){
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(txtAmount.getWindowToken(), 0);
         }
     }
 
