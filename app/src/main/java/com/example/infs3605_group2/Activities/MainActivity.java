@@ -1,10 +1,11 @@
-package com.example.infs3605_group2;
+package com.example.infs3605_group2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import com.example.infs3605_group2.Models.User;
+import com.example.infs3605_group2.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

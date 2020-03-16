@@ -15,12 +15,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.infs3605_group2.Models.Transaction;
 import com.example.infs3605_group2.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +34,7 @@ public class ParentLanding extends Fragment {
     private TextView txtParentBalance;
     private TextView txtChildBalance;
     private TextView txtAmount;
+    private TextView txtMessage;
     private Button btnSend;
     private Button btnRetrieve;
     private double amount;
@@ -37,6 +42,7 @@ public class ParentLanding extends Fragment {
     private double parentBalance;
     private DatabaseReference childBalanceRef;
     private DatabaseReference parentBalanceRef;
+    private DatabaseReference transactionRef;
 
     public ParentLanding() {
         // Required empty public constructor
@@ -47,7 +53,7 @@ public class ParentLanding extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_parent_landing, container, false);
+        return inflater.inflate(R.layout.parent_landing, container, false);
     }
 
     @Override
@@ -57,13 +63,12 @@ public class ParentLanding extends Fragment {
         txtAmount = view.findViewById(R.id.editTextAmount);
         btnSend = view.findViewById(R.id.buttonSend);
         btnRetrieve = view.findViewById(R.id.buttonRetrieve);
+        txtMessage = view.findViewById(R.id.editTextMessage);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         childBalanceRef = database.getReference("/userInfo/username2/balance");
         parentBalanceRef = database.getReference("/userInfo/username1/balance");
-        Toast.makeText(getActivity(), "in",
-                Toast.LENGTH_SHORT).show();
-
+        transactionRef = database.getReference("/transactions/username2");
         //will need to code dynamic path with username val
 
         // Read from the database
@@ -71,8 +76,6 @@ public class ParentLanding extends Fragment {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 childBalance = dataSnapshot.getValue(Long.class);
                 txtChildBalance.setText("$" + childBalance);
             }
@@ -89,8 +92,6 @@ public class ParentLanding extends Fragment {
         parentBalanceRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 parentBalance = dataSnapshot.getValue(Long.class);
                 txtParentBalance.setText("$" + parentBalance);
             }
@@ -107,10 +108,11 @@ public class ParentLanding extends Fragment {
             @Override
             public void onClick(View v) {
                 hideSoftKeyboard();
-                amount = Double.parseDouble(txtAmount.getText().toString());
+                amount = Double.parseDouble(txtAmount.getText().toString()); //NEED TO VALIDTE INT ONLY
                 if(validateBalance(parentBalance)){
                     childBalanceRef.setValue(childBalance + amount);
                     parentBalanceRef.setValue(parentBalance - amount);
+                    pushTransaction("+");
                 }
                 else{
                     Toast.makeText(getActivity(), "mum u need more money",
@@ -127,6 +129,7 @@ public class ParentLanding extends Fragment {
                 if(validateBalance(childBalance)){
                     childBalanceRef.setValue(childBalance - amount);
                     parentBalanceRef.setValue(parentBalance + amount);
+                    pushTransaction("-");
                 }
                 else{
                     Toast.makeText(getActivity(), "mum ur kid doesnt even have that much??",
@@ -136,7 +139,7 @@ public class ParentLanding extends Fragment {
         });
     }
 
-    public boolean validateBalance(double balance){
+    private boolean validateBalance(double balance){
         if(balance - amount >= 0){
             return true;
         }
@@ -144,6 +147,15 @@ public class ParentLanding extends Fragment {
             return false;
         }
     }
+    private void pushTransaction(String symbol){
+        Transaction transaction = new Transaction();
+        transaction.setDescription(txtMessage.getText().toString());
+        transaction.setEvent(symbol + "$" + amount);
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+        transaction.setTimestamp(dateTimeFormat.format(LocalDateTime.now()));
+        transactionRef.push().setValue(transaction);
+    }
+
     //code ref: https://stackoverflow.com/questions/4005728/hide-default-keyboard-on-click-in-android
     private void hideSoftKeyboard(){
         if(getActivity().getCurrentFocus()!=null && getActivity().getCurrentFocus() instanceof EditText){
