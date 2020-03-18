@@ -48,6 +48,8 @@ public class LoginActivity1 extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(LoginActivity1.this, "Login Success", Toast.LENGTH_SHORT).show();
                     startActivity (new Intent(LoginActivity1.this, MainActivity.class));
+
+                    //TO BE DONE - LOGIN TO WHICHEVER TYPE OF USER IT IS
                     finish();
                 }
                 else {

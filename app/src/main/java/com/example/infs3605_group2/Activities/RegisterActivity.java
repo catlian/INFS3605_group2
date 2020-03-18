@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText username;
@@ -41,7 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Password needs to be at least 6 characters", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    registerUser(user_text,pass_text);
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("password", pass_text);
+                    registerUser("linkedAccount",pass_text);
                 }
             }
         });
