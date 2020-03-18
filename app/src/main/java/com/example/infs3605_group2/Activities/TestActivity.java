@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.infs3605_group2.FragmentSwapper;
 import com.example.infs3605_group2.Fragments.ChildLanding;
@@ -25,6 +26,10 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+        Bundle bundle = getIntent().getExtras();
+        String message = bundle.getString("userType");
+        Toast.makeText(TestActivity.this, message, Toast.LENGTH_SHORT).show();
+
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
