@@ -2,9 +2,10 @@ package com.example.infs3605_group2.Models;
 
 public class User {
     private String password;
-    private String usertype;
+    private String username;
+    private String userType;
     private int profileImage;
-    private int balance;
+    private double balance;
     private String linkedAccount;
 
 
@@ -19,6 +20,14 @@ public class User {
         this.linkedAccount = linkedAccount;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -27,12 +36,12 @@ public class User {
         this.password = password;
     }
 
-    public String getUsertype() {
-        return usertype;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setUsertype(String usertype) {
-        this.usertype = usertype;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public int getProfileImage() {
@@ -43,11 +52,11 @@ public class User {
         this.profileImage = profileImage;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 }

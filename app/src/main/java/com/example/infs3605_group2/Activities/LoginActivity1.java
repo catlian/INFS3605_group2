@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.infs3605_group2.Models.User;
 import com.example.infs3605_group2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +28,8 @@ public class LoginActivity1 extends AppCompatActivity {
     private EditText password;
     private Button login;
     private FirebaseAuth auth;
+
+    public static User currentUser;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,33 +50,41 @@ public class LoginActivity1 extends AppCompatActivity {
     }
 
     private void loginTask (final String username, String password) {
-        final String user = username;
         auth.signInWithEmailAndPassword(username + "@gmail.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    setCurrentUserInfo(username);
                     Toast.makeText(LoginActivity1.this, "Login Success", Toast.LENGTH_SHORT).show();
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("userInfo").child(user).child("userType");
-                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                           String type = dataSnapshot.getValue().toString();
-                           Intent intent = new Intent(LoginActivity1.this, TestActivity.class);
-                           intent.putExtra("userType", type);
-                           startActivity (intent);
-                           finish();
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                    //startActivity (new Intent(LoginActivity1.this, MainActivity.class));
-                    //finish();
                 }
                 else {
                     Toast.makeText(LoginActivity1.this, "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
                 }
+
+            }
+        });
+    }
+    private void setCurrentUserInfo(final String username){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("userInfo").child(username);
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(User.class);
+                currentUser.setUsername(username);
+                if (currentUser.getUserType().equals("parent")){
+                    Intent intent = new Intent(LoginActivity1.this, ParentActivity.class);
+                    startActivity (intent);
+//                    finish();
+                }
+                else{
+                    Intent intent = new Intent(LoginActivity1.this, ChildActivity.class);
+                    startActivity (intent);
+//                    finish();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });

@@ -14,21 +14,20 @@ import com.example.infs3605_group2.Fragments.ParentLanding;
 import com.example.infs3605_group2.Fragments.ParentLog;
 import com.example.infs3605_group2.R;
 
-public class TestActivity extends AppCompatActivity {
+public class ParentActivity extends AppCompatActivity {
 
-    private FragmentSwapper fs = new FragmentSwapper();
+    FragmentSwapper fs = new FragmentSwapper();
     private Button button;
     private Button btnlog;
-    private Button childLand;
-    private Button childLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        Bundle bundle = getIntent().getExtras();
-        String message = bundle.getString("userType");
-        Toast.makeText(TestActivity.this, message, Toast.LENGTH_SHORT).show();
+//        Bundle bundle = getIntent().getExtras();
+//        String message = bundle.getString("userType");
+//        Toast.makeText(ParentActivity.this, message, Toast.LENGTH_SHORT).show();
+
 
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -46,21 +45,6 @@ public class TestActivity extends AppCompatActivity {
                 fs.swapFragmentBackstack(log, v);
             }
         });
-        childLand = findViewById(R.id.childLand);
-        childLand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChildLanding landingFrag = new ChildLanding();
-                fs.swapFragmentBackstack(landingFrag, v);
-            }
-        });
-        childLog = findViewById(R.id.childLog);
-        childLog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChildLog log = new ChildLog();
-                fs.swapFragmentBackstack(log, v);
-            }
-        });
+
     }
 }

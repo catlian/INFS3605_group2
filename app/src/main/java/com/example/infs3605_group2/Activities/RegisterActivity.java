@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String user_text = username.getText().toString();
                 String pass_text = password.getText().toString();
                 String linkedAcc_text = linkedAcc.getText().toString();
-                String balance_text = balance.getText().toString();
+                double balance_text = Double.parseDouble(balance.getText().toString());
                 String userType_text = userType.getText().toString();
 
                 if (TextUtils.isEmpty(user_text) || TextUtils.isEmpty(pass_text)){

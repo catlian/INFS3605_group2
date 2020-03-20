@@ -14,34 +14,34 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
-    private Button login;
-    private Button register;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        login = (Button) findViewById(R.id.login_button);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity (new Intent(MainActivity.this, LoginActivity1.class));
-                finish();
-            }
-        });
-        register = (Button) findViewById(R.id.register_button);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity (new Intent(MainActivity.this, RegisterActivity.class));
-                finish();
-            }
-        });
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("/userInfo/username2");
-
-        User user2 = new User();
-        user2.setBalance(200);
-        myRef.setValue(user2);
-
-    }
+//    private Button login;
+//    private Button register;
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//        login = (Button) findViewById(R.id.login_button);
+//        login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity (new Intent(MainActivity.this, LoginActivity1.class));
+//                finish();
+//            }
+//        });
+//        register = (Button) findViewById(R.id.register_button);
+//        register.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity (new Intent(MainActivity.this, RegisterActivity.class));
+//                finish();
+//            }
+//        });
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("/userInfo/username2");
+//
+//        User user2 = new User();
+//        user2.setBalance(200);
+//        myRef.setValue(user2);
+//
+//    }
 }

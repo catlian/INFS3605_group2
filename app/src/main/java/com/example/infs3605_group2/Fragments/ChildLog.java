@@ -16,6 +16,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.infs3605_group2.Activities.LoginActivity1;
 import com.example.infs3605_group2.Models.Transaction;
 import com.example.infs3605_group2.R;
 import com.google.firebase.database.DataSnapshot;
@@ -45,8 +46,7 @@ public class ChildLog extends Fragment {
         tableLayout = view.findViewById(R.id.tableLayout);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference transactionRef = database.getReference("/transactions/username2");
-        //will need to code dynamic path with username val
+        DatabaseReference transactionRef = database.getReference("/transactions/" + LoginActivity1.currentUser.getUsername());
 
         //need to limit description chars
         transactionRef.addValueEventListener(new ValueEventListener() {

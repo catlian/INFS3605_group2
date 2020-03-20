@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.infs3605_group2.Activities.LoginActivity1;
 import com.example.infs3605_group2.Models.Transaction;
 import com.example.infs3605_group2.R;
 import com.google.firebase.database.DataSnapshot;
@@ -66,9 +67,9 @@ public class ParentLanding extends Fragment {
         txtMessage = view.findViewById(R.id.editTextMessage);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        childBalanceRef = database.getReference("/userInfo/username2/balance");
-        parentBalanceRef = database.getReference("/userInfo/username1/balance");
-        transactionRef = database.getReference("/transactions/username2");
+        childBalanceRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getLinkedAccount()).child("balance");
+        parentBalanceRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("balance");
+        transactionRef = database.getReference().child("transactions").child(LoginActivity1.currentUser.getLinkedAccount());
         //will need to code dynamic path with username val
 
         // Read from the database

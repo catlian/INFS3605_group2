@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ChildActivity">
+
+    <LinearLayout
+        android:id="@+id/navLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/fragment_slot"
+        app:layout_constraintStart_toStartOf="@+id/fragment_slot"
+        app:layout_constraintTop_toTopOf="@+id/fragment_slot">
+
+        <Button
+            android:id="@+id/btnLanding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Landing" />
+
+        <Button
+            android:id="@+id/btnLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_slot"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/navLayout">
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
