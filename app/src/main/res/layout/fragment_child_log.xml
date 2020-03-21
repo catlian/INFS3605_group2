@@ -8,7 +8,8 @@
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:isScrollContainer="true">
 
         <TableRow
             android:id="@+id/tableHeader"

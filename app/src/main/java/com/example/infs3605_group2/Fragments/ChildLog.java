@@ -28,9 +28,16 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ChildLog extends Fragment {
     private TableLayout tableLayout;
+    private Context mContext;
 
     public ChildLog() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
     }
 
     @Override
@@ -52,27 +59,26 @@ public class ChildLog extends Fragment {
         transactionRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Context context = getContext();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Transaction transaction = snapshot.getValue(Transaction.class);
-                    TableRow tbrow = new TableRow(context);
+                    TableRow tbrow = new TableRow(mContext);
                     TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0,TableRow.LayoutParams.WRAP_CONTENT,
                             1.0f);
-                    TextView timestamp = new TextView(context);
+                    TextView timestamp = new TextView(mContext);
                     timestamp.setText(transaction.getTimestamp());
                     timestamp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     timestamp.setGravity(Gravity.CENTER);
                     timestamp.setLayoutParams(layoutParams);
                     tbrow.addView(timestamp);
 
-                    TextView description = new TextView(context);
+                    TextView description = new TextView(mContext);
                     description.setText(String.valueOf(transaction.getDescription()));
                     description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     description.setGravity(Gravity.CENTER);
                     description.setLayoutParams(layoutParams);
                     tbrow.addView(description);
 
-                    TextView event = new TextView(context);
+                    TextView event = new TextView(mContext);
                     event.setText(String.valueOf(transaction.getEvent()));
                     event.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     event.setGravity(Gravity.CENTER);

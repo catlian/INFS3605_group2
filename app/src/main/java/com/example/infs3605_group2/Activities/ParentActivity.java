@@ -1,22 +1,21 @@
 package com.example.infs3605_group2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.infs3605_group2.FragmentSwapper;
-import com.example.infs3605_group2.Fragments.ChildLanding;
-import com.example.infs3605_group2.Fragments.ChildLog;
 import com.example.infs3605_group2.Fragments.ParentLanding;
 import com.example.infs3605_group2.Fragments.ParentLog;
 import com.example.infs3605_group2.R;
 
 public class ParentActivity extends AppCompatActivity {
 
-    FragmentSwapper fs = new FragmentSwapper();
+
     private Button button;
     private Button btnlog;
 
@@ -28,13 +27,16 @@ public class ParentActivity extends AppCompatActivity {
 //        String message = bundle.getString("userType");
 //        Toast.makeText(ParentActivity.this, message, Toast.LENGTH_SHORT).show();
 
+        ParentLanding landingFrag = new ParentLanding();
+        swapFragment(landingFrag);
+
 
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ParentLanding landingFrag = new ParentLanding();
-                fs.swapFragmentBackstack(landingFrag, v);
+                swapFragment(landingFrag);
             }
         });
         btnlog = findViewById(R.id.button2);
@@ -42,9 +44,15 @@ public class ParentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ParentLog log = new ParentLog();
-                fs.swapFragmentBackstack(log, v);
+                swapFragment(log);
             }
         });
 
+    }
+    private void swapFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_slot, fragment);
+        fragmentTransaction.commit();
     }
 }

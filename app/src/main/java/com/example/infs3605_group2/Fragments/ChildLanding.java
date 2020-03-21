@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.infs3605_group2.Activities.LoginActivity1;
 import com.example.infs3605_group2.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,8 +51,8 @@ public class ChildLanding extends Fragment {
         txtBalance = view.findViewById(R.id.txtBalance);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        childBalanceRef = database.getReference("/userInfo/username2/balance");
-        //will need to code dynamic path with username val
+        childBalanceRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("balance");
+
 
         // Read from the database
         childBalanceRef.addValueEventListener(new ValueEventListener() {

@@ -35,18 +35,29 @@ import java.util.Map;
 public class ParentLog extends Fragment {
 
     private TableLayout tableLayout;
-
+    private Context mContext;
 
     public ParentLog() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_parent_log, container, false);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(final View view, Bundle savedInstanceState){
         tableLayout = view.findViewById(R.id.tableLayout);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference transactionRef = database.getReference().child("transactions").child(LoginActivity1.currentUser.getLinkedAccount());
@@ -55,27 +66,26 @@ public class ParentLog extends Fragment {
         transactionRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Context context = getContext();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Transaction transaction = snapshot.getValue(Transaction.class);
-                    TableRow tbrow = new TableRow(context);
+                    TableRow tbrow = new TableRow(mContext);
                     TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0,TableRow.LayoutParams.WRAP_CONTENT,
                             1.0f);
-                    TextView timestamp = new TextView(context);
+                    TextView timestamp = new TextView(mContext);
                     timestamp.setText(transaction.getTimestamp());
                     timestamp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     timestamp.setGravity(Gravity.CENTER);
                     timestamp.setLayoutParams(layoutParams);
                     tbrow.addView(timestamp);
 
-                    TextView description = new TextView(context);
+                    TextView description = new TextView(mContext);
                     description.setText(String.valueOf(transaction.getDescription()));
                     description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     description.setGravity(Gravity.CENTER);
                     description.setLayoutParams(layoutParams);
                     tbrow.addView(description);
 
-                    TextView event = new TextView(context);
+                    TextView event = new TextView(mContext);
                     event.setText(String.valueOf(transaction.getEvent()));
                     event.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     event.setGravity(Gravity.CENTER);
@@ -96,7 +106,5 @@ public class ParentLog extends Fragment {
 
 
 
-        return view;
     }
-
 }
