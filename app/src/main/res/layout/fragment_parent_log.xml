@@ -5,45 +5,53 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ParentLog">
 
-    <TableLayout
-    android:id="@+id/tableLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        android:layout_weight="1">
 
-    <TableRow
-        android:id="@+id/tableHeader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:isScrollContainer="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:padding="3dip"
-            android:text="Timestamp"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+        <TableRow
+            android:id="@+id/tableHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:padding="3dip"
-            android:text="Description"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dip"
+                android:text="Timestamp"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:padding="3dip"
-            android:text="Amount"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dip"
+                android:text="Description"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    </TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:padding="3dip"
+                android:text="Amount"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    </TableLayout>
+        </TableRow>
+
+        </TableLayout>
+    </ScrollView>
 
 </FrameLayout>
