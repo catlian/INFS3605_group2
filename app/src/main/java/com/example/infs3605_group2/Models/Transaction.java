@@ -1,22 +1,31 @@
 package com.example.infs3605_group2.Models;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Transaction implements Serializable {
-    private String timestamp;
+    private String date;
     private String event;
     private String description;
+    private long time;
 
     public Transaction() {
     }
 
-    public String getTimestamp() {
-        return timestamp;
+    public long getTime() {
+        return time;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getEvent() {

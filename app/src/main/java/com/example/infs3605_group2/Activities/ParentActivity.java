@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.infs3605_group2.Fragments.ParentChoreView;
 import com.example.infs3605_group2.Fragments.ParentLanding;
 import com.example.infs3605_group2.Fragments.ParentLog;
+import com.example.infs3605_group2.Fragments.ParentTransactions;
 import com.example.infs3605_group2.R;
 
 public class ParentActivity extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class ParentActivity extends AppCompatActivity {
 
     private Button button;
     private Button btnlog;
+    private Button btnChores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,14 @@ public class ParentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ParentLog log = new ParentLog();
                 swapFragment(log);
+            }
+        });
+        btnlog = findViewById(R.id.btnChores);
+        btnlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParentTransactions parentTransactions = new ParentTransactions();
+                swapFragment(parentTransactions);
             }
         });
 

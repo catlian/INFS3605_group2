@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Bordered" parent="@android:style/TextAppearance.Medium">
+        <item name="android:background">@drawable/text_border</item>
+    </style>
+
 </resources>

@@ -21,13 +21,9 @@ import com.example.infs3605_group2.Models.Transaction;
 import com.example.infs3605_group2.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,10 +56,11 @@ public class ParentLog extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState){
         tableLayout = view.findViewById(R.id.tableLayout);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference transactionRef = database.getReference().child("transactions").child(LoginActivity1.currentUser.getLinkedAccount());
+        Query transactionQuery = database.getReference().child("transactions").child(LoginActivity1.currentUser.getLinkedAccount())
+                .orderByChild("time");
 
         //need to limit description chars
-        transactionRef.addValueEventListener(new ValueEventListener() {
+        transactionQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
@@ -72,7 +69,7 @@ public class ParentLog extends Fragment {
                     TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0,TableRow.LayoutParams.WRAP_CONTENT,
                             1.0f);
                     TextView timestamp = new TextView(mContext);
-                    timestamp.setText(transaction.getTimestamp());
+                    timestamp.setText(transaction.getDate());
                     timestamp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     timestamp.setGravity(Gravity.CENTER);
                     timestamp.setLayoutParams(layoutParams);

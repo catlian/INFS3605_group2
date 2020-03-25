@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -127,9 +128,11 @@ public class ParentLanding extends Fragment {
             public void onClick(View v) {
                 hideSoftKeyboard();
                 amount = Double.parseDouble(txtAmount.getText().toString());
+                double roundOff = Math.round(amount * 100.0) / 100.0;
+                System.out.println(roundOff);
                 if(validateBalance(childBalance)){
-                    childBalanceRef.setValue(childBalance - amount);
-                    parentBalanceRef.setValue(parentBalance + amount);
+                    childBalanceRef.setValue(childBalance - roundOff);
+                    parentBalanceRef.setValue(parentBalance + roundOff);
                     pushTransaction("-");
                 }
                 else{
@@ -152,8 +155,9 @@ public class ParentLanding extends Fragment {
         Transaction transaction = new Transaction();
         transaction.setDescription(txtMessage.getText().toString());
         transaction.setEvent(symbol + "$" + amount);
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-        transaction.setTimestamp(dateTimeFormat.format(LocalDateTime.now()));
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        transaction.setDate(dateTimeFormat.format(LocalDateTime.now()));
+        transaction.setTime(-1 * new Date().getTime());
         transactionRef.push().setValue(transaction);
     }
 

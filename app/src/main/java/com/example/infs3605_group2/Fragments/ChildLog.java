@@ -1,7 +1,6 @@
 package com.example.infs3605_group2.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -65,7 +64,7 @@ public class ChildLog extends Fragment {
                     TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0,TableRow.LayoutParams.WRAP_CONTENT,
                             1.0f);
                     TextView timestamp = new TextView(mContext);
-                    timestamp.setText(transaction.getTimestamp());
+                    timestamp.setText(transaction.getDate());
                     timestamp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     timestamp.setGravity(Gravity.CENTER);
                     timestamp.setLayoutParams(layoutParams);
