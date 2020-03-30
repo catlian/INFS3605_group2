@@ -7,6 +7,9 @@ public class User {
     private int profileImage;
     private double balance;
     private String linkedAccount;
+    private String savingsGoalPic;
+    private String savingsGoal;
+    private String savingsName;
 
 
     public User() {
@@ -43,6 +46,31 @@ public class User {
     public void setUserType(String userType) {
         this.userType = userType;
     }
+    
+     public String getSavingsGoalPic() {
+        return savingsGoalPic;
+    }
+
+    public void setSavingsGoalPic(String savingsGoalPic) {
+        this.savingsGoalPic = savingsGoalPic;
+    }
+
+    public String getSavingsGoal() {
+        return savingsGoal;
+    }
+
+    public void setSavingsGoal(String savingsGoal) {
+        this.savingsGoal = savingsGoal;
+    }
+
+    public String getSavingsName() {
+        return savingsName;
+    }
+
+    public void setSavingsName(String savingsName) {
+        this.savingsName = savingsName;
+    }
+
 
     public int getProfileImage() {
         return profileImage;
