@@ -27,6 +27,12 @@
             android:layout_height="wrap_content"
             android:text="Log" />
 
+        <Button
+            android:id="@+id/btnChores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chores" />
+
     </LinearLayout>
 
     <FrameLayout

@@ -2,10 +2,12 @@ package com.example.infs3605_group2.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,10 +43,6 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
     @Override
     public void onBindViewHolder(@NonNull ChoreViewHolder holder, int position) {
         final Chore choreAtPosition = choresToAdapt.get(position);
-
-        // Contrast how I wrote this method with the method for ArticleAdapter. They both achieve
-        // the same goal, but this way is cleaner. I defined my own method "bind" in the BookViewHolder
-        // class, and all the assignment and setup is done in there instead.
         holder.bind(choreAtPosition);
     }
 
@@ -58,6 +56,7 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
         public View view;
         public TextView txtChore;
         public TextView txtAmount;
+        public LinearLayout linearLayout;
 
         // This constructor is used in onCreateViewHolder
         public ChoreViewHolder(View v) {
@@ -65,6 +64,7 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
             view = v;
             txtChore = v.findViewById(R.id.txtChore);
             txtAmount = v.findViewById(R.id.txtAmount);
+            linearLayout = v.findViewById(R.id.linearLayout);
 
 //            bookmarkImageView.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -84,6 +84,12 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
         public void bind(final Chore chore) {
             txtChore.setText(chore.getDescription());
             txtAmount.setText(String.valueOf(chore.getAmount()));
+            if(chore.getIsDone().equals("false")){
+                linearLayout.setBackgroundColor(Color.GRAY);
+            }
+            else{
+                linearLayout.setBackgroundColor(Color.GREEN);
+            }
 
 //            view.setOnClickListener(new View.OnClickListener() {
 //                @Override

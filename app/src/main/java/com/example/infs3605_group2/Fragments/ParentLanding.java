@@ -130,6 +130,7 @@ public class ParentLanding extends Fragment {
                 amount = Double.parseDouble(txtAmount.getText().toString());
                 double roundOff = Math.round(amount * 100.0) / 100.0;
                 System.out.println(roundOff);
+                System.out.format("%.4f", amount);
                 if(validateBalance(childBalance)){
                     childBalanceRef.setValue(childBalance - roundOff);
                     parentBalanceRef.setValue(parentBalance + roundOff);

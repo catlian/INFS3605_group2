@@ -1,13 +1,26 @@
 package com.example.infs3605_group2.Models;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Chore {
     private double amount;
     private String description;
     private int icon;
-    private boolean isDone;
-    private boolean isPaid;
+    private String isDone;
+    private String key;
 
     public Chore() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public double getAmount() {
@@ -34,19 +47,23 @@ public class Chore {
         this.icon = icon;
     }
 
-    public boolean isDone() {
+    public String getIsDone() {
         return isDone;
     }
 
-    public void setDone(boolean done) {
-        isDone = done;
+    public void setIsDone(String isDone) {
+        this.isDone = isDone;
     }
 
-    public boolean isPaid() {
-        return isPaid;
-    }
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("key", key);
+        result.put("icon", icon);
+        result.put("description", description);
+        result.put("amount", amount);
+        result.put("isDone", "true");
 
-    public void setPaid(boolean paid) {
-        isPaid = paid;
+        return result;
     }
 }

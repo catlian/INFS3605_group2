@@ -59,10 +59,10 @@ public class ParentChoreView extends Fragment{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Chore chore = snapshot.getValue(Chore.class);
+                    chore.setKey(snapshot.getKey());
                     choreData.add(chore);
                 }
-//                GenericTypeIndicator<ArrayList<Chore>> t = new GenericTypeIndicator<ArrayList<Chore>>() {};
-//                choreData = dataSnapshot.getValue(t);
+
                 recyclerView = getView().findViewById(R.id.rv_chores);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(layoutManager);
