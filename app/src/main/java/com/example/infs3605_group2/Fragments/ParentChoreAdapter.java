@@ -1,6 +1,8 @@
 package com.example.infs3605_group2.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -11,12 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infs3605_group2.Activities.LoginActivity1;
 import com.example.infs3605_group2.Models.Chore;
+import com.example.infs3605_group2.Models.Transaction;
 import com.example.infs3605_group2.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.ChoreViewHolder>{
@@ -37,6 +47,7 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
                         .inflate(R.layout.parent_chore_layout, parent, false);
 
         ChoreViewHolder choreViewHolder = new ChoreViewHolder(view);
+
         return choreViewHolder;
     }
 
@@ -89,33 +100,56 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
             }
             else{
                 linearLayout.setBackgroundColor(Color.GREEN);
+                view.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        createDialog(chore);
+                    }
+                });
             }
+        }
+        private void createDialog(final Chore chore){
+            AppCompatActivity activity = (AppCompatActivity)view.getContext();
+            LayoutInflater factory = LayoutInflater.from(activity);
+            final View transactionDialogView = factory.inflate(R.layout.parent_transaction_dialog, null);
+            final AlertDialog deleteDialog = new AlertDialog.Builder(activity).create();
+            deleteDialog.setView(transactionDialogView);
+            TextView txtDesc = transactionDialogView.findViewById(R.id.txtDescription);
+            txtDesc.setText(chore.getDescription());
+            TextView txtAmount = transactionDialogView.findViewById(R.id.txtAmount);
+            txtAmount.setText(String.valueOf(chore.getAmount()));
 
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Context context = view.getContext();
-//
-//                    Intent intent = new Intent(context, BookDetailActivity.class);
-//                    intent.putExtra("isbn", book.getIsbn());
-//                    context.startActivity(intent);
-//                }
-//            });
+            transactionDialogView.findViewById(R.id.btnSend).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference notDoneRef = database.getReference().child("chores").
+                            child(LoginActivity1.currentUser.getLinkedAccount()).child(chore.getKey());
+                    notDoneRef.removeValue();
 
-//            shareImageView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Context context = view.getContext();
-//                    Intent intent = new Intent(Intent.ACTION_SEND);
-//
-//                    intent.putExtra(Intent.EXTRA_TEXT, book.getTitle());
-//                    intent.setType("text/plain");
-//                    context.startActivity(intent);
-//                }
-//            });
+                    DatabaseReference transactionRef = database.getReference().child("transactions").
+                            child(LoginActivity1.currentUser.getLinkedAccount());
 
-//            String imageUrl = book.getBookImage();
-//            Glide.with(view.getContext()).load(imageUrl).into(coverImageView);
+                    Transaction transaction = new Transaction();
+                    transaction.setDescription(chore.getDescription());
+                    transaction.setEvent("+$" + chore.getAmount());
+                    DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+                    transaction.setDate(dateTimeFormat.format(LocalDateTime.now()));
+                    transaction.setTime(-1 * new Date().getTime());
+                    transactionRef.push().setValue(transaction);
+
+                    deleteDialog.dismiss();
+                }
+            });
+            transactionDialogView.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteDialog.dismiss();
+                }
+            });
+
+            deleteDialog.show();
         }
     }
 }

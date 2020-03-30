@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -52,7 +53,8 @@ public class ChildLog extends Fragment {
         tableLayout = view.findViewById(R.id.tableLayout);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference transactionRef = database.getReference("/transactions/" + LoginActivity1.currentUser.getUsername());
+        Query transactionRef = database.getReference("/transactions/" +
+                LoginActivity1.currentUser.getUsername()).orderByChild("time");
 
         //need to limit description chars
         transactionRef.addValueEventListener(new ValueEventListener() {

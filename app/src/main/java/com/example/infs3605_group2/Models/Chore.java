@@ -2,10 +2,11 @@ package com.example.infs3605_group2.Models;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Chore {
+public class Chore implements Serializable {
     private double amount;
     private String description;
     private int icon;
@@ -13,6 +14,14 @@ public class Chore {
     private String key;
 
     public Chore() {
+    }
+
+    public Chore(double amount, String description, int icon, String isDone, String key) {
+        this.amount = amount;
+        this.description = description;
+        this.icon = icon;
+        this.isDone = isDone;
+        this.key = key;
     }
 
     public String getKey() {

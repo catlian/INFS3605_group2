@@ -50,6 +50,7 @@ public class ParentChoreView extends Fragment{
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_parent_chores, container, false);
+        recyclerView = view.findViewById(R.id.rv_chores);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference choresRef = database.getReference().child("chores").child(LoginActivity1.currentUser.getLinkedAccount());
@@ -57,13 +58,13 @@ public class ParentChoreView extends Fragment{
         choresRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                choreData.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Chore chore = snapshot.getValue(Chore.class);
                     chore.setKey(snapshot.getKey());
                     choreData.add(chore);
                 }
 
-                recyclerView = getView().findViewById(R.id.rv_chores);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(layoutManager);
                 ParentChoreAdapter parentChoreAdapter = new ParentChoreAdapter(choreData);
@@ -81,6 +82,8 @@ public class ParentChoreView extends Fragment{
 
         return view;
     }
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
 
+    }
 
 }

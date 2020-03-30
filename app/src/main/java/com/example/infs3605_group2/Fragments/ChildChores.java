@@ -68,14 +68,19 @@ public class ChildChores extends Fragment {
         notDoneRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        tblNotDone.removeAllViews();
+                        tblPending.removeAllViews();
                         ArrayList<Chore> allChores = new ArrayList<>();
+                        ArrayList<Chore> notDoneChores = new ArrayList<>();
+                        ArrayList<Chore> pendingChores = new ArrayList<>();
+                        allChores.clear();
+                        notDoneChores.clear();
+                        pendingChores.clear();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Chore chore = snapshot.getValue(Chore.class);
                             chore.setKey(snapshot.getKey());
                             allChores.add(chore);
                         }
-                        ArrayList<Chore> notDoneChores = new ArrayList<>();
-                        ArrayList<Chore> pendingChores = new ArrayList<>();
 
                         for (Chore aChore : allChores) {
                             if (aChore.getIsDone().equals("true")) {
@@ -128,7 +133,6 @@ public class ChildChores extends Fragment {
             tbrow.addView(btn);
 
 
-
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -136,7 +140,9 @@ public class ChildChores extends Fragment {
                             LoginActivity1.currentUser.getUsername() + "/" + chore.getKey());
                     notDoneRef.setValue(chore.toMap());
                 }
-            });tblNotDone.addView(tbrow);
+            });
+
+            tblNotDone.addView(tbrow);
         }
     }
     private void addPending(ArrayList<Chore> chores){
