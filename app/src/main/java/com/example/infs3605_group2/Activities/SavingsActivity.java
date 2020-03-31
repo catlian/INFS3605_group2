@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+
 import com.example.infs3605_group2.Models.User;
 import com.example.infs3605_group2.R;
 import com.google.android.gms.tasks.OnCompleteListener;

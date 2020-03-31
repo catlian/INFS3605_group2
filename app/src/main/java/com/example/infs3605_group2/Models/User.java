@@ -10,8 +10,6 @@ public class User {
     private String savingsGoalPic;
     private String savingsGoal;
     private String savingsName;
-
-
     public User() {
     }
 
@@ -39,15 +37,7 @@ public class User {
         this.password = password;
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-    
-     public String getSavingsGoalPic() {
+    public String getSavingsGoalPic() {
         return savingsGoalPic;
     }
 
@@ -71,6 +61,13 @@ public class User {
         this.savingsName = savingsName;
     }
 
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     public int getProfileImage() {
         return profileImage;
