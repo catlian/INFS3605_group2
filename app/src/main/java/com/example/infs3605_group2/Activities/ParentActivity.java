@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.infs3605_group2.Fragments.ChildLog;
 import com.example.infs3605_group2.Fragments.ParentOtherTransactions;
 import com.example.infs3605_group2.Fragments.ParentLog;
+import com.example.infs3605_group2.Fragments.ParentSavings;
 import com.example.infs3605_group2.Fragments.ParentTransactionMain;
 import com.example.infs3605_group2.R;
 
@@ -20,7 +22,7 @@ public class ParentActivity extends AppCompatActivity {
     private Button button;
     private Button btnlog;
     private Button btnChores;
-
+    private Button btnSavings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,15 @@ public class ParentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ParentTransactionMain parentTransactionMain = new ParentTransactionMain();
                 swapFragment(parentTransactionMain);
+            }
+        });
+
+        btnSavings = findViewById(R.id.btnSavingsGoal);
+        btnSavings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParentSavings savings = new ParentSavings();
+                swapFragment(savings);
             }
         });
 
