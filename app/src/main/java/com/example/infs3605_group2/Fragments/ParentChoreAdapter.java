@@ -113,8 +113,8 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
             AppCompatActivity activity = (AppCompatActivity)view.getContext();
             LayoutInflater factory = LayoutInflater.from(activity);
             final View transactionDialogView = factory.inflate(R.layout.parent_transaction_dialog, null);
-            final AlertDialog deleteDialog = new AlertDialog.Builder(activity).create();
-            deleteDialog.setView(transactionDialogView);
+            final AlertDialog transactionDialog = new AlertDialog.Builder(activity).create();
+            transactionDialog.setView(transactionDialogView);
             TextView txtDesc = transactionDialogView.findViewById(R.id.txtDescription);
             txtDesc.setText(chore.getDescription());
             TextView txtAmount = transactionDialogView.findViewById(R.id.txtAmount);
@@ -139,17 +139,17 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
                     transaction.setTime(-1 * new Date().getTime());
                     transactionRef.push().setValue(transaction);
 
-                    deleteDialog.dismiss();
+                    transactionDialog.dismiss();
                 }
             });
             transactionDialogView.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteDialog.dismiss();
+                    transactionDialog.dismiss();
                 }
             });
 
-            deleteDialog.show();
+            transactionDialog.show();
         }
     }
 }
