@@ -31,7 +31,7 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ParentLanding extends Fragment {
+public class ParentOtherTransactions extends Fragment {
 
     private TextView txtParentBalance;
     private TextView txtChildBalance;
@@ -46,7 +46,7 @@ public class ParentLanding extends Fragment {
     private DatabaseReference parentBalanceRef;
     private DatabaseReference transactionRef;
 
-    public ParentLanding() {
+    public ParentOtherTransactions() {
         // Required empty public constructor
     }
 
@@ -55,7 +55,7 @@ public class ParentLanding extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.parent_landing, container, false);
+        return inflater.inflate(R.layout.parent_other_transactions, container, false);
     }
 
     @Override
