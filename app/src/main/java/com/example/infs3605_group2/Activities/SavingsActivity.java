@@ -45,14 +45,11 @@ public class SavingsActivity extends AppCompatActivity {
     private Button create;
     private Uri imageUri;
     private ImageView savePic;
-    private String username;
     public static User currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savings);
-        Bundle bundle = getIntent().getExtras();
-        username = bundle.getString("username");
         upload = findViewById(R.id.button_upload);
         create = findViewById(R.id.button_create);
         name = findViewById(R.id.editText_name);
@@ -60,14 +57,12 @@ public class SavingsActivity extends AppCompatActivity {
         savePic = findViewById(R.id.imageView_savings);
         savePic.setVisibility(View.INVISIBLE);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("userInfo").child(username);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername());
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentUser = dataSnapshot.getValue(User.class);
-                currentUser.setUsername(username);
-                Picasso.get().load(currentUser.getSavingsGoalPic()).into(savePic);
+                Picasso.get().load(LoginActivity1.currentUser.getSavingsGoalPic()).into(savePic);
                 savePic.setVisibility(View.VISIBLE);
             }
             @Override
@@ -86,13 +81,20 @@ public class SavingsActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(SavingsActivity.this, "Savings goal created, now get saving!", Toast.LENGTH_SHORT).show();
-                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(username).child("savingsName").setValue(name_text);
-                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(username).child("savingsGoal").setValue(goal_text);
-                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(currentUser.getLinkedAccount()).child("savingsName").setValue(name_text);
-                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(currentUser.getLinkedAccount()).child("savingsGoal").setValue(goal_text);
-                    Intent intent = new Intent(SavingsActivity.this, SavingsActivityBase.class);
-                    intent.putExtra("username", username);
-                    startActivity (intent);
+                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsName").setValue(name_text);
+                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsGoal").setValue("$" + goal_text);
+                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getLinkedAccount()).child("savingsName").setValue(name_text);
+                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getLinkedAccount()).child("savingsGoal").setValue("$" + goal_text);
+                    if (LoginActivity1.currentUser.getUserType().equals("parent")){
+                        Intent intent = new Intent(SavingsActivity.this, ParentActivity.class);
+                        startActivity (intent);
+//                    finish();
+                    }
+                    else{
+                        Intent intent = new Intent(SavingsActivity.this, ChildActivity.class);
+                        startActivity (intent);
+//                    finish();
+                    }
                 }
             }
         });
@@ -133,8 +135,8 @@ public class SavingsActivity extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         String urL = uri.toString();
                         Picasso.get().load(urL).into(savePic);
-                        FirebaseDatabase.getInstance().getReference().child("userInfo").child(username).child("savingsGoalPic").setValue(urL);
-                        FirebaseDatabase.getInstance().getReference().child("userInfo").child(currentUser.getLinkedAccount()).child("savingsGoalPic").setValue(urL);
+                        FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsGoalPic").setValue(urL);
+                        FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getLinkedAccount()).child("savingsGoalPic").setValue(urL);
                         Log.d("downloadUri", urL);
                         pd.dismiss();
                         Toast.makeText(SavingsActivity.this, "image upload successful", Toast.LENGTH_SHORT).show();

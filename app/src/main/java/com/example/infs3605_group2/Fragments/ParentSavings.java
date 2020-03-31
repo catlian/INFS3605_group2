@@ -27,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
+
 
 public class ParentSavings extends Fragment {
 
@@ -59,34 +61,38 @@ public class ParentSavings extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
-        edit = view.findViewById(R.id.button_editGoal);
+        edit = view.findViewById(R.id.btnCreate);
         name = view.findViewById(R.id.textView_name);
         goal = view.findViewById(R.id.textView_amount);
-    //    savePic = findViewById(R.id.savingsGoalPic);
-    //    savePic.setVisibility(View.INVISIBLE);
+        savePic = view.findViewById(R.id.imageView_SavingsPic);
+        savePic.setVisibility(View.INVISIBLE);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SavingsActivity.class);
+                startActivity (intent);
+            }
+        });
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername());
+
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-           //     currentUser = dataSnapshot.getValue(User.class);
-           //     currentUser.setUsername(username);
-           //     Picasso.get().load(currentUser.getSavingsGoalPic()).into(savePic);
-           //     savePic.setVisibility(View.VISIBLE);
+                if (LoginActivity1.currentUser.getSavingsGoal() == "0"){
+                    name.setVisibility(View.INVISIBLE);
+                    goal.setVisibility(View.INVISIBLE);
+                    edit.setText("CREATE");
+                }
+                Picasso.get().load(LoginActivity1.currentUser.getSavingsGoalPic()).into(savePic);
                 name.setText(LoginActivity1.currentUser.getSavingsName());
                 goal.setText(LoginActivity1.currentUser.getSavingsGoal());
+                savePic.setVisibility(View.VISIBLE);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-       /* edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ParentSavings.this, SavingsActivity.class);
-                intent.putExtra("username", username);
-                startActivity (intent);
-            }
-        });*/
+
     }
 }

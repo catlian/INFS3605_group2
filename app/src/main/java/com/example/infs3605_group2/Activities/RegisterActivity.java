@@ -61,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                     map.put("linkedAccount", linkedAcc_text);
                     map.put("userType", userType_text);
                     map.put("balance", balance_text);
+                    map.put("savingsGoal", "0");
                     //FirebaseDatabase.getInstance().getReference().child("userInfo").child(user_text);
                     FirebaseDatabase.getInstance().getReference().child("userInfo").child(user_text).updateChildren(map);
                     registerUser(user_text , pass_text);
