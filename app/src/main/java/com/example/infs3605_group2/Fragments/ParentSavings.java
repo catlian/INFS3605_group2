@@ -74,15 +74,16 @@ public class ParentSavings extends Fragment {
             }
         });
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername());
-
+        if (LoginActivity1.currentUser.getSavingsGoal().equals("0")){
+            name.setVisibility(View.INVISIBLE);
+            goal.setVisibility(View.INVISIBLE);
+            edit.setText("CREATE");
+        }
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (LoginActivity1.currentUser.getSavingsGoal() == "0"){
-                    name.setVisibility(View.INVISIBLE);
-                    goal.setVisibility(View.INVISIBLE);
-                    edit.setText("CREATE");
-                }
+                currentUser = dataSnapshot.getValue(User.class);
+
                 Picasso.get().load(LoginActivity1.currentUser.getSavingsGoalPic()).into(savePic);
                 name.setText(LoginActivity1.currentUser.getSavingsName());
                 goal.setText(LoginActivity1.currentUser.getSavingsGoal());
