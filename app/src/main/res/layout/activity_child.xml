@@ -33,6 +33,12 @@
             android:layout_height="wrap_content"
             android:text="Chores" />
 
+        <Button
+            android:id="@+id/btnSavingsGoal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Goal" />
+
     </LinearLayout>
 
     <FrameLayout

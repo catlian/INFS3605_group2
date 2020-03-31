@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.infs3605_group2.Activities.LoginActivity1;
 import com.example.infs3605_group2.Activities.SavingsActivity;
@@ -40,6 +41,12 @@ public class ParentSavings extends Fragment {
     private ImageView savePic;
     private String username;
     public static User currentUser;
+    private DatabaseReference nameRef;
+    private DatabaseReference goalRef;
+    private DatabaseReference pictureRef;
+    private String name1;
+    private String goal1;
+    private String pic1;
 
     public ParentSavings() {
         // Required empty public constructor
@@ -73,27 +80,69 @@ public class ParentSavings extends Fragment {
                 startActivity (intent);
             }
         });
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername());
+
         if (LoginActivity1.currentUser.getSavingsGoal().equals("0")){
             name.setVisibility(View.INVISIBLE);
             goal.setVisibility(View.INVISIBLE);
             edit.setText("CREATE");
         }
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentUser = dataSnapshot.getValue(User.class);
 
-                Picasso.get().load(LoginActivity1.currentUser.getSavingsGoalPic()).into(savePic);
-                name.setText(LoginActivity1.currentUser.getSavingsName());
-                goal.setText(LoginActivity1.currentUser.getSavingsGoal());
-                savePic.setVisibility(View.VISIBLE);
-            }
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        nameRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsName");
+        nameRef.addValueEventListener(new ValueEventListener() {
+
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                name1 = dataSnapshot.getValue(String.class);
+                name.setText(name1);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(getActivity(), "sorry",
+                        Toast.LENGTH_SHORT).show();
 
             }
         });
+        goalRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsGoal");
+        goalRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                goal1 = dataSnapshot.getValue(String.class);
+                goal.setText(goal1);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(getActivity(), "sorry",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        pictureRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsGoalPic");
+        pictureRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                pic1 = dataSnapshot.getValue(String.class);
+                Picasso.get().load(pic1).into(savePic);
+                savePic.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(getActivity(), "sorry",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
 
     }
 }

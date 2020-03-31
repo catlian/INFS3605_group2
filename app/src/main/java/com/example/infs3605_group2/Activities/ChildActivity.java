@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.example.infs3605_group2.Fragments.ChildChores;
 import com.example.infs3605_group2.Fragments.ChildLanding;
 import com.example.infs3605_group2.Fragments.ChildLog;
+import com.example.infs3605_group2.Fragments.ParentSavings;
 import com.example.infs3605_group2.R;
 
 public class ChildActivity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class ChildActivity extends AppCompatActivity {
     private Button btnLanding;
     private Button btnLog;
     private Button btnChore;
+    private Button btnSavings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,14 @@ public class ChildActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ChildChores chores = new ChildChores();
                 swapFragment(chores);
+            }
+        });
+        btnSavings = findViewById(R.id.btnSavingsGoal);
+        btnSavings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParentSavings savings = new ParentSavings();
+                swapFragment(savings);
             }
         });
     }
