@@ -48,6 +48,7 @@ public class ChildLanding extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         txtName = view.findViewById(R.id.txtName);
+        txtName.setText(LoginActivity1.currentUser.getUsername());
         txtBalance = view.findViewById(R.id.txtBalance);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();

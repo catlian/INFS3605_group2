@@ -19,7 +19,7 @@ import com.example.infs3605_group2.R;
 public class ParentActivity extends AppCompatActivity {
 
 
-    private Button button;
+//    private Button button;
     private Button btnlog;
     private Button btnChores;
     private Button btnSavings;
@@ -31,18 +31,18 @@ public class ParentActivity extends AppCompatActivity {
 //        String message = bundle.getString("userType");
 //        Toast.makeText(ParentActivity.this, message, Toast.LENGTH_SHORT).show();
 
-        ParentOtherTransactions landingFrag = new ParentOtherTransactions();
+        ParentTransactionMain landingFrag = new ParentTransactionMain();
         swapFragment(landingFrag);
 
 
-        button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParentOtherTransactions landingFrag = new ParentOtherTransactions();
-                swapFragment(landingFrag);
-            }
-        });
+//        button = findViewById(R.id.button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ParentOtherTransactions landingFrag = new ParentOtherTransactions();
+//                swapFragment(landingFrag);
+//            }
+//        });
         btnlog = findViewById(R.id.button2);
         btnlog.setOnClickListener(new View.OnClickListener() {
             @Override

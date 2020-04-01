@@ -11,9 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.TestActivity">
-
-        </activity>
+        <activity android:name=".Activities.ChildActivity" />
+        <activity android:name=".Activities.ParentActivity" />
+        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.LoginActivity1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,13 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activities.RegisterActivity" />
-        <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.ChildActivity" />
-        <activity android:name=".Activities.ParentActivity" />
-        <activity android:name=".Activities.SavingsActivity" />
-        <activity android:name=".Activities.SavingsActivityBase" />
     </application>
 
 </manifest>
