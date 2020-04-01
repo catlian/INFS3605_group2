@@ -28,6 +28,7 @@ public class LoginActivity1 extends AppCompatActivity {
     private EditText password;
     private Button login;
     private FirebaseAuth auth;
+    private Button register;
 
     public static User currentUser;
     @Override
@@ -37,6 +38,7 @@ public class LoginActivity1 extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username_text);
         password = (EditText) findViewById(R.id.password_text);
         login = (Button) findViewById(R.id.button_login);
+        register = findViewById(R.id.button_register);
         auth = FirebaseAuth.getInstance();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +48,13 @@ public class LoginActivity1 extends AppCompatActivity {
                 loginTask (username_text, password_text);
             }
         });
+
+       /* register.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
 
     }
 

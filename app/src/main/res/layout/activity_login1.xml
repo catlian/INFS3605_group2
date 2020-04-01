@@ -17,8 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.234"
-        tools:text="Username:" />
+        app:layout_constraintVertical_bias="0.234" />
 
     <EditText
         android:id="@+id/password_text"
@@ -26,14 +25,14 @@
         android:layout_height="90dp"
         android:contentDescription="password123"
         android:hint="Password"
+        android:password="true"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.457"
-        tools:text="Password:" />
+        app:layout_constraintVertical_bias="0.457" />
 
     <Button
         android:id="@+id/button_login"
@@ -126,5 +125,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.808"
         app:srcCompat="@drawable/orline" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

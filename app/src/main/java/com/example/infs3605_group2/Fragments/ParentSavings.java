@@ -2,6 +2,7 @@ package com.example.infs3605_group2.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,8 @@ public class ParentSavings extends Fragment {
     private String name1;
     private String goal1;
     private String pic1;
+    private long number;
+    private long number2;
 
     public ParentSavings() {
         // Required empty public constructor
@@ -73,6 +77,8 @@ public class ParentSavings extends Fragment {
         goal = view.findViewById(R.id.textView_amount);
         savePic = view.findViewById(R.id.imageView_SavingsPic);
         savePic.setVisibility(View.INVISIBLE);
+        final ProgressBar simpleProgressBar=(ProgressBar)view.findViewById(R.id.simpleProgressBar); // initiate the progress bar
+        simpleProgressBar.setBackgroundColor(Color.BLACK); // black background color for the progress bar
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +117,13 @@ public class ParentSavings extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 goal1 = dataSnapshot.getValue(String.class);
-                goal.setText(goal1);
+                goal.setText("$" + goal1);
+                number = Integer.parseInt(goal1);
+                number2 = (long) LoginActivity1.currentUser.getBalance();
+                if (number2 > number){
+                    number = number2;
+                }
+                simpleProgressBar.setProgress((int) (number/number2));
             }
 
             @Override

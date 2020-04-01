@@ -82,9 +82,9 @@ public class SavingsActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(SavingsActivity.this, "Savings goal created, now get saving!", Toast.LENGTH_SHORT).show();
                     FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsName").setValue(name_text);
-                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsGoal").setValue("$" + goal_text);
+                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsGoal").setValue(goal_text);
                     FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getLinkedAccount()).child("savingsName").setValue(name_text);
-                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getLinkedAccount()).child("savingsGoal").setValue("$" + goal_text);
+                    FirebaseDatabase.getInstance().getReference().child("userInfo").child(LoginActivity1.currentUser.getLinkedAccount()).child("savingsGoal").setValue(goal_text);
                     if (LoginActivity1.currentUser.getUserType().equals("parent")){
                         Intent intent = new Intent(SavingsActivity.this, ParentActivity.class);
                         startActivity (intent);
