@@ -14,6 +14,7 @@
         <activity android:name=".Activities.ChildActivity" />
         <activity android:name=".Activities.ParentActivity" />
         <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.SavingsActivity"/>
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.LoginActivity1">
             <intent-filter>
