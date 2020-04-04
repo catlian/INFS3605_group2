@@ -39,6 +39,12 @@
             android:layout_height="wrap_content"
             android:text="Goal" />
 
+        <Button
+            android:id="@+id/btnVideos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Videos" />
+
     </LinearLayout>
 
     <FrameLayout
