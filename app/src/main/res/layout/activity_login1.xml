@@ -12,6 +12,7 @@
         android:layout_height="83dp"
         android:contentDescription="parent2"
         android:hint="Username"
+        android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
