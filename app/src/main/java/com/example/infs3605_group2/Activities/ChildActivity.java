@@ -1,12 +1,15 @@
 package com.example.infs3605_group2.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,6 +22,7 @@ import com.example.infs3605_group2.Fragments.YoutubeFragment;
 import com.example.infs3605_group2.Fragments.YoutubeRecycler;
 import com.example.infs3605_group2.Fragments.YoutubeVideoAdapter;
 import com.example.infs3605_group2.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ChildActivity extends AppCompatActivity  {
 
@@ -42,10 +46,11 @@ public class ChildActivity extends AppCompatActivity  {
 //        Bundle bundle = getIntent().getExtras();
 //        String message = bundle.getString("userType");
         mInstance = this;
-        ChildLanding landingFrag = new ChildLanding();
+        final ChildLanding landingFrag = new ChildLanding();
+
         swapFragment(landingFrag);
 
-        btnLanding = findViewById(R.id.btnLanding);
+        /*btnLanding = findViewById(R.id.btnLanding);
         btnLanding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +88,37 @@ public class ChildActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 YoutubeRecycler videos = new YoutubeRecycler();
                 swapFragment(videos);
+            }
+        });*/
+
+        //setting navigation items destination paths when clicked
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavBar);
+        bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.homeButton:
+                        swapFragment(landingFrag);
+                        break;
+                    case R.id.saveButton:
+                        ParentSavings savings = new ParentSavings();
+                        swapFragment(savings);
+                        break;
+                    case R.id.choresButton:
+                        ChildChores choreFragment = new ChildChores();
+                        swapFragment(choreFragment);
+                        break;
+                    case R.id.gamesButton:
+                        swapFragment(landingFrag); //TODO: change this to game activity once game is made
+                        break;
+                    case R.id.learnButton:
+                        YoutubeRecycler videos = new YoutubeRecycler();
+                        swapFragment(videos);
+                        break;
+                }
+                return true;
             }
         });
     }

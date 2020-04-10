@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.ChildActivity">
-
+<!--
     <LinearLayout
         android:id="@+id/navLayout"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@id/fragment_slot"
-        app:layout_constraintStart_toStartOf="@+id/fragment_slot"
+        app:layout_constraintEnd_toEndOf="@id/fragment_slot"
         app:layout_constraintTop_toTopOf="@+id/fragment_slot">
 
         <Button
@@ -46,15 +45,30 @@
             android:text="Videos" />
 
     </LinearLayout>
+-->
 
     <FrameLayout
         android:id="@+id/fragment_slot"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/navLayout">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavBar"
+        app:layout_constraintTop_toTopOf="parent">
+
 
     </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:itemBackground="@drawable/bottom_nav_colors"
+        app:itemTextColor="@android:color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

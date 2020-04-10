@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homeButton"
+        android:enabled="true"
+        android:icon="@drawable/home"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/saveButton"
+        android:enabled="true"
+        android:icon="@drawable/savings"
+        android:title="Savings Goal"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/choresButton"
+        android:enabled="true"
+        android:icon="@drawable/chores"
+        android:title="Chores"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/gamesButton"
+        android:enabled="true"
+        android:icon="@drawable/game"
+        android:title="Play"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/learnButton"
+        android:enabled="true"
+        android:icon="@drawable/book"
+        android:title="Learn"
+        app:showAsAction="ifRoom" />
+</menu>
