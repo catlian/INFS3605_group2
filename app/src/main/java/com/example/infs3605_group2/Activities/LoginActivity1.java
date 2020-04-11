@@ -3,6 +3,7 @@ package com.example.infs3605_group2.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.media.app.NotificationCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -96,6 +97,7 @@ public class LoginActivity1 extends AppCompatActivity {
 //                    finish();
                 }
                 else{
+                   // addNotification();
                     Intent intent = new Intent(LoginActivity1.this, ChildActivity.class);
                     startActivity (intent);
 //                    finish();
@@ -107,4 +109,7 @@ public class LoginActivity1 extends AppCompatActivity {
             }
         });
     }
+  /*  private void addNotification(){
+
+    }*/
 }

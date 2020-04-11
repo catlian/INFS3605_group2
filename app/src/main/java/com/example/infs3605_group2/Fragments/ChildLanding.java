@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class ChildLanding extends Fragment {
 
     private TextView txtName;
     private TextView txtBalance;
+    private ImageView mImageView;
 
     private DatabaseReference childBalanceRef;
 
@@ -50,7 +52,15 @@ public class ChildLanding extends Fragment {
         txtName = view.findViewById(R.id.txtName);
         txtName.setText(LoginActivity1.currentUser.getUsername());
         txtBalance = view.findViewById(R.id.txtBalance);
+        mImageView = view.findViewById(R.id.imageView_child);
+        mImageView.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+
+            }
+
+        });
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         childBalanceRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("balance");
 

@@ -53,12 +53,12 @@ public class RegisterActivity2 extends AppCompatActivity {
                     child_map.put("linkedAccount", parent_username);
                     child_map.put("userType", "child");
                     child_map.put("balance", 0);
-                    child_map.put("savingsGoal", 0);
+                    child_map.put("savingsGoal", "0");
                     parent_map.put("password", parent_password);
                     parent_map.put("linkedAccount", user_text);
                     parent_map.put("userType", "parent");
                     parent_map.put("balance", balance_text);
-                    parent_map.put("savingsGoal", 0);
+                    parent_map.put("savingsGoal", "0");
                     FirebaseDatabase.getInstance().getReference().child("userInfo").child(user_text).updateChildren(child_map);
                     FirebaseDatabase.getInstance().getReference().child("userInfo").child(parent_username).updateChildren(parent_map);
                     registerUser(user_text , pass_text);
