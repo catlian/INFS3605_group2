@@ -1,20 +1,25 @@
 package com.example.infs3605_group2.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.infs3605_group2.Fragments.ChildChores;
 import com.example.infs3605_group2.Fragments.ChildLog;
 import com.example.infs3605_group2.Fragments.ParentOtherTransactions;
 import com.example.infs3605_group2.Fragments.ParentLog;
 import com.example.infs3605_group2.Fragments.ParentSavings;
 import com.example.infs3605_group2.Fragments.ParentTransactionMain;
+import com.example.infs3605_group2.Fragments.YoutubeRecycler;
 import com.example.infs3605_group2.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ParentActivity extends AppCompatActivity {
 
@@ -34,6 +39,30 @@ public class ParentActivity extends AppCompatActivity {
         ParentTransactionMain landingFrag = new ParentTransactionMain();
         swapFragment(landingFrag);
 
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.parentNavBar);
+        bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.parentHomeButton:
+                        ParentTransactionMain landingFrag = new ParentTransactionMain();
+                        swapFragment(landingFrag);
+                        break;
+                    case R.id.parentSaveButton:
+                        ParentSavings savings = new ParentSavings();
+                        swapFragment(savings);
+                        break;
+                    case R.id.parentChoresButton:
+                        ParentTransactionMain choreFragment = new ParentTransactionMain();
+                        swapFragment(choreFragment);
+                        break;
+                }
+                return true;
+            }
+        });
+
 
 //        button = findViewById(R.id.button);
 //        button.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +72,8 @@ public class ParentActivity extends AppCompatActivity {
 //                swapFragment(landingFrag);
 //            }
 //        });
+
+        /*
         btnlog = findViewById(R.id.button2);
         btnlog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +98,7 @@ public class ParentActivity extends AppCompatActivity {
                 ParentSavings savings = new ParentSavings();
                 swapFragment(savings);
             }
-        });
+        });*/
 
     }
     private void swapFragment(Fragment fragment) {
