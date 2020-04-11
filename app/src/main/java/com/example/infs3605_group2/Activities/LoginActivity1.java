@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,29 +50,37 @@ public class LoginActivity1 extends AppCompatActivity {
             }
         });
 
-       /* register.setOnClickListener(new OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(LoginActivity1.this, RegisterActivity.class);
+                startActivity (intent);
             }
-        });*/
+        });
 
     }
 
     private void loginTask (final String username, String password) {
-        auth.signInWithEmailAndPassword(username + "@gmail.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    setCurrentUserInfo(username);
-                    Toast.makeText(LoginActivity1.this, "Login Success", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(LoginActivity1.this, "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
-                }
+        if (TextUtils.isEmpty(username)) {
+            Toast.makeText(LoginActivity1.this, "Missing Username", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(password)) {
+            Toast.makeText(LoginActivity1.this, "Missing Password", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            auth.signInWithEmailAndPassword(username + "@gmail.com", password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        setCurrentUserInfo(username);
+                        Toast.makeText(LoginActivity1.this, "Login Success", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity1.this, "Invalid Username or Password!", Toast.LENGTH_SHORT).show();
+                    }
 
-            }
-        });
+                }
+            });
+        }
     }
     private void setCurrentUserInfo(final String username){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("userInfo").child(username);
