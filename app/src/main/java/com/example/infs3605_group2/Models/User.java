@@ -4,7 +4,7 @@ public class User {
     private String password;
     private String username;
     private String userType;
-    private int profileImage;
+    private String profileImage;
     private double balance;
     private String linkedAccount;
     private String savingsGoalPic;
@@ -69,11 +69,11 @@ public class User {
         this.userType = userType;
     }
 
-    public int getProfileImage() {
+    public String getProfileImage() {
         return profileImage;
     }
 
-    public void setProfileImage(int profileImage) {
+    public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
     }
 
