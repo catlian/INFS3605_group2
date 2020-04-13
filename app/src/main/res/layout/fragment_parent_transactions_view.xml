@@ -13,7 +13,7 @@
         android:minHeight="?actionBarSize"
         app:tabBackground="@color/cardview_dark_background"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/colorPrimaryDark"
+        app:tabIndicatorColor="@color/colorPrimary"
         app:tabIndicatorHeight="4dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="#FFFFFF"
