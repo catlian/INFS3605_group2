@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.example.infs3605_group2.Fragments.ChildChores;
 import com.example.infs3605_group2.Fragments.ChildLog;
+import com.example.infs3605_group2.Fragments.ParentLanding;
 import com.example.infs3605_group2.Fragments.ParentOtherTransactions;
 import com.example.infs3605_group2.Fragments.ParentLog;
 import com.example.infs3605_group2.Fragments.ParentSavings;
@@ -36,7 +37,7 @@ public class ParentActivity extends AppCompatActivity {
 //        String message = bundle.getString("userType");
 //        Toast.makeText(ParentActivity.this, message, Toast.LENGTH_SHORT).show();
 
-        ParentTransactionMain landingFrag = new ParentTransactionMain();
+        ParentLanding landingFrag = new ParentLanding();
         swapFragment(landingFrag);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.parentNavBar);
@@ -47,8 +48,11 @@ public class ParentActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.parentHomeButton:
-                        ParentTransactionMain landingFrag = new ParentTransactionMain();
-                        swapFragment(landingFrag);
+                       ParentLanding landing = new ParentLanding();
+                       swapFragment(landing);
+
+                        /* ParentTransactionMain landingFrag = new ParentTransactionMain();
+                        swapFragment(landingFrag);*/
                         break;
                     case R.id.parentSaveButton:
                         ParentSavings savings = new ParentSavings();
