@@ -12,6 +12,7 @@
         android:layout_height="27dp"
         android:layout_marginBottom="296dp"
         android:layout_marginStart="116dp"
+        android:fontFamily="@font/trebuchetms"
         android:text="Lets set a profile picture!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -22,7 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="184dp"
         android:layout_marginStart="144dp"
+        android:fontFamily="@font/couriernew"
         android:text="Set a picture"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
