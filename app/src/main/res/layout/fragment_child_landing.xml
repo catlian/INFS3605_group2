@@ -150,13 +150,14 @@
 
             <ImageView
                 android:id="@+id/imageView10"
-                android:layout_width="99dp"
-                android:layout_height="84dp"
+                android:layout_width="89dp"
+                android:layout_height="76dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/see_activity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/money" />
 
             <TextView
