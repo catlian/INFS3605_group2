@@ -123,7 +123,9 @@ public class ParentSavings extends Fragment {
                 if (number2 > number){
                     number = number2;
                 }
-                simpleProgressBar.setProgress((int) (number/number2));
+                if (number2 != 0) {
+                    simpleProgressBar.setProgress((int) (number / number2));
+                }
             }
 
             @Override
