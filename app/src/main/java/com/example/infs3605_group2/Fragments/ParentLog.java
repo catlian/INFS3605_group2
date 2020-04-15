@@ -73,6 +73,7 @@ public class ParentLog extends Fragment {
                     timestamp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                     timestamp.setGravity(Gravity.CENTER);
                     timestamp.setLayoutParams(layoutParams);
+
                     tbrow.addView(timestamp);
 
                     TextView description = new TextView(mContext);

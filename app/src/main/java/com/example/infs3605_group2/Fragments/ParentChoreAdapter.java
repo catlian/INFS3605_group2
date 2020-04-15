@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +95,9 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
         // See comment in onBindViewHolder
         public void bind(final Chore chore) {
             txtChore.setText(chore.getDescription());
+            txtChore.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             txtAmount.setText(String.valueOf(chore.getAmount()));
+            txtAmount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             if(chore.getIsDone().equals("false")){
                 linearLayout.setBackgroundColor(Color.GRAY);
             }
