@@ -41,7 +41,7 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/couriernew"
+            android:fontFamily="@font/arial"
             android:text="Dollaroo"
             android:textColor="#000000"
             android:textSize="30sp"
@@ -85,10 +85,10 @@
 
     <Button
         android:id="@+id/button_login"
-        android:layout_width="142dp"
-        android:layout_height="63dp"
-        android:background="@color/colorPrimary"
-        android:fontFamily="@font/couriernew"
+        android:layout_width="150dp"
+        android:layout_height="61dp"
+        android:background="@drawable/biggreenbutton"
+        android:fontFamily="@font/helvetica"
         android:text="Go!"
         android:textColor="@android:color/white"
         android:textSize="32sp"
@@ -103,17 +103,21 @@
         android:id="@+id/button_register"
         android:layout_width="150dp"
         android:layout_height="61dp"
-        android:layout_marginBottom="32dp"
         android:background="@drawable/bigdarkbuton"
-        android:fontFamily="@font/couriernew"
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp"
+        android:fontFamily="@font/helvetica"
         android:text="New?"
         android:textColor="@android:color/white"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.97" />
 
     <ImageView
         android:id="@+id/imageView17"
@@ -121,6 +125,7 @@
         android:layout_height="62dp"
         app:layout_constraintBottom_toTopOf="@id/button_register"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_login"
         app:srcCompat="@drawable/orline" />

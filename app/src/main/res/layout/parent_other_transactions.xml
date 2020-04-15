@@ -77,8 +77,8 @@
 
     <Button
         android:id="@+id/buttonRetrieve"
-        android:layout_width="102dp"
-        android:layout_height="50dp"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
         android:background="@drawable/biggreenbutton"
         android:fontFamily="@font/helvetica"
         android:text="Retrieve"
@@ -87,16 +87,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.789"
+        app:layout_constraintHorizontal_bias="0.752"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.898" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <Button
         android:id="@+id/buttonSend"
         style="/"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="55dp"
         android:background="@drawable/buttonyellowbig"
         android:fontFamily="@font/helvetica"
         android:text="Send"
@@ -105,10 +105,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.232"
+        app:layout_constraintHorizontal_bias="0.239"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.898" />
+        app:layout_constraintVertical_bias="0.901" />
 
     <TextView
         android:id="@+id/textView4"

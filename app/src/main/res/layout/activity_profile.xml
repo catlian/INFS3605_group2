@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="184dp"
         android:layout_marginStart="144dp"
-        android:fontFamily="@font/couriernew"
+        android:fontFamily="@font/helvetica"
         android:text="Set a picture"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

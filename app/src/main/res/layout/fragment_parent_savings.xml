@@ -52,7 +52,7 @@
         android:layout_height="62dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/biggreenbutton"
         android:fontFamily="@font/helvetica"
         android:text="Edit"
         android:textColor="#FFFFFF"

@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/couriernew"
+            android:fontFamily="@font/arial"
             android:text="Savings Goal"
             android:textAlignment="center"
             android:textSize="30sp"
@@ -46,10 +46,10 @@
 
     <Button
         android:id="@+id/button_editGoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:fontFamily="@font/couriernew"
+        android:layout_width="107dp"
+        android:layout_height="60dp"
+        android:background="@drawable/biggreenbutton"
+        android:fontFamily="@font/helvetica"
         android:text="Save"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
