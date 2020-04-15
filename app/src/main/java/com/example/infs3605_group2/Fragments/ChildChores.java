@@ -38,6 +38,7 @@ import java.util.ArrayList;
 public class ChildChores extends Fragment {
     private TableLayout tblNotDone;
     private TableLayout tblPending;
+    private TableLayout tableLayout;
     private Context mContext;
     private FirebaseDatabase database;
 
@@ -60,16 +61,88 @@ public class ChildChores extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         tblNotDone = view.findViewById(R.id.tblNotDone);
+
         tblPending = view.findViewById(R.id.tblPending);
+
         database = FirebaseDatabase.getInstance();
         DatabaseReference notDoneRef = database.getReference("/chores/" + LoginActivity1.currentUser.getUsername());
         //need to limit description chars
+
+        tableLayout = view.findViewById(R.id.tableLayout);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        Query transactionRef = database.getReference("/transactions/" +
+                LoginActivity1.currentUser.getUsername()).orderByChild("time");
+
+        //need to limit description chars
+        transactionRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Transaction transaction = snapshot.getValue(Transaction.class);
+                    TableRow tbrow = new TableRow(mContext);
+                    TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0,TableRow.LayoutParams.WRAP_CONTENT,
+                            1.0f);
+                    TextView timestamp = new TextView(mContext);
+                    timestamp.setText(transaction.getDate());
+                    timestamp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    timestamp.setGravity(Gravity.CENTER);
+                    timestamp.setLayoutParams(layoutParams);
+                    tbrow.addView(timestamp);
+
+                    TextView description = new TextView(mContext);
+                    description.setText(String.valueOf(transaction.getDescription()));
+                    description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    description.setGravity(Gravity.CENTER);
+                    description.setLayoutParams(layoutParams);
+                    tbrow.addView(description);
+
+                    TextView event = new TextView(mContext);
+                    event.setText(String.valueOf(transaction.getEvent()));
+                    event.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    event.setGravity(Gravity.CENTER);
+                    event.setLayoutParams(layoutParams);
+                    tbrow.addView(event);
+
+                    tableLayout.addView(tbrow);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(getActivity(), "sorry",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         notDoneRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         tblNotDone.removeAllViews();
                         tblPending.removeAllViews();
+                        TableRow tbrow = new TableRow(mContext);
+                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
+                                1.0f);
+                        TextView icon = new TextView(mContext);
+                        icon.setText("To Do");
+                        icon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                        icon.setGravity(Gravity.CENTER);
+                        icon.setLayoutParams(layoutParams);
+                        tbrow.addView(icon);
+                        tblNotDone.addView(tbrow);
+
+                        TableRow tbrowPending = new TableRow(mContext);
+                        TableRow.LayoutParams layoutParamsPending = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
+                                1.0f);
+                        TextView pending = new TextView(mContext);
+                        pending.setText("Waiting for Payment");
+                        pending.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                        pending.setGravity(Gravity.CENTER);
+                        pending.setLayoutParams(layoutParamsPending);
+                        tbrowPending.addView(pending);
+                        tblPending.addView(tbrowPending);
+
                         ArrayList<Chore> allChores = new ArrayList<>();
                         ArrayList<Chore> notDoneChores = new ArrayList<>();
                         ArrayList<Chore> pendingChores = new ArrayList<>();

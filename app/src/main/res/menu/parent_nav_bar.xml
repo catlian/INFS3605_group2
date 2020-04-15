@@ -18,7 +18,7 @@
         android:id="@+id/parentChoresButton"
         android:enabled="true"
         android:icon="@drawable/chores"
-        android:title="Chores"
+        android:title="Transactions"
         app:showAsAction="ifRoom" />
 
 </menu>

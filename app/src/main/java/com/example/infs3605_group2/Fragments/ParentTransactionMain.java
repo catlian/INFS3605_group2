@@ -42,8 +42,9 @@ public class ParentTransactionMain extends Fragment {
         viewPager = getView().findViewById(R.id.viewPager);
         tabLayout = getView().findViewById(R.id.tabLayout);
         adapter = new TabAdapter(getChildFragmentManager());
-        adapter.addFragment(new ParentChoreView(), "Transactions");
+        adapter.addFragment(new ParentChoreView(), "Chores");
         adapter.addFragment(new ParentOtherTransactions(), "Other");
+        adapter.addFragment(new ParentLog(), "Log");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         adapter.notifyDataSetChanged();
