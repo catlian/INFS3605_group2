@@ -10,6 +10,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/couriernew"
+                android:text="Chores"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView20"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/savings"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/chores" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,42 +55,17 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerNewChores"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1" />
 
-                <TableLayout
-                    android:id="@+id/tblNotDone"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:weightSum="1">
-
-                    <TableRow
-                        android:id="@+id/trHeader"
-                        android:layout_width="200dp"
-                        android:layout_height="match_parent" />
-
-                </TableLayout>
-            </ScrollView>
-
-            <ScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerPendingChores"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TableLayout
-                    android:id="@+id/tblPending"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TableRow
-                        android:id="@+id/trPHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                </TableLayout>
-            </ScrollView>
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -69,7 +82,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
-                app:layout_constraintBottom_toTopOf="@id/scrollview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -80,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/couriernew"
-                    android:text="Chores History"
+                    android:text="History"
                     android:textAlignment="center"
                     android:textSize="36sp"
                     android:textStyle="bold"
@@ -104,59 +116,49 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ScrollView
-                android:id="@+id/scrollview"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scrollbars="none"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/constraintLayout">
 
-                <TableLayout
-                    android:id="@+id/tableLayout"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:isScrollContainer="true">
+                    android:layout_weight="0.15"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Date " />
 
-                    <TableRow
-                        android:id="@+id/tableHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/txtDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Description " />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/arial"
-                            android:padding="3dip"
-                            android:text="Date"
-                            android:textAlignment="center"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Amount" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/arial"
-                            android:padding="3dip"
-                            android:text="Description"
-                            android:textAlignment="center"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/arial"
-                            android:padding="3dip"
-                            android:text="Amount"
-                            android:textAlignment="center"
-                            android:textSize="24sp"
-                            android:textStyle="bold" />
-
-                    </TableRow>
-
-                </TableLayout>
-            </ScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerLog"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

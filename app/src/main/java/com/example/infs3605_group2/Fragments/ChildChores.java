@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -36,11 +38,16 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class ChildChores extends Fragment {
-    private TableLayout tblNotDone;
-    private TableLayout tblPending;
-    private TableLayout tableLayout;
+    private RecyclerView recyclerLog;
+    private RecyclerView recyclerNewChores;
+    private RecyclerView recyclerPendingChores;
     private Context mContext;
     private FirebaseDatabase database;
+
+    private ArrayList<Transaction> transactionArrayList = new ArrayList<>();
+    private ArrayList<Chore> choreNewArrayList = new ArrayList<>();
+    private ArrayList<Chore> chorePendingArrayList = new ArrayList<>();
+    private ArrayList<Chore> allChores = new ArrayList<>();
 
     public ChildChores() {
         // Required empty public constructor
@@ -60,52 +67,40 @@ public class ChildChores extends Fragment {
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-        tblNotDone = view.findViewById(R.id.tblNotDone);
-
-        tblPending = view.findViewById(R.id.tblPending);
+        recyclerLog = view.findViewById(R.id.recyclerLog);
+        recyclerNewChores = view.findViewById(R.id.recyclerNewChores);
+        recyclerPendingChores = view.findViewById(R.id.recyclerPendingChores);
 
         database = FirebaseDatabase.getInstance();
         DatabaseReference notDoneRef = database.getReference("/chores/" + LoginActivity1.currentUser.getUsername());
-        //need to limit description chars
-
-        tableLayout = view.findViewById(R.id.tableLayout);
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        Query transactionRef = database.getReference("/transactions/" +
-                LoginActivity1.currentUser.getUsername()).orderByChild("time");
-
-        //need to limit description chars
-        transactionRef.addValueEventListener(new ValueEventListener() {
+        notDoneRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Transaction transaction = snapshot.getValue(Transaction.class);
-                    TableRow tbrow = new TableRow(mContext);
-                    TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0,TableRow.LayoutParams.WRAP_CONTENT,
-                            1.0f);
-                    TextView timestamp = new TextView(mContext);
-                    timestamp.setText(transaction.getDate());
-                    timestamp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                    timestamp.setGravity(Gravity.CENTER);
-                    timestamp.setLayoutParams(layoutParams);
-                    tbrow.addView(timestamp);
-
-                    TextView description = new TextView(mContext);
-                    description.setText(String.valueOf(transaction.getDescription()));
-                    description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                    description.setGravity(Gravity.CENTER);
-                    description.setLayoutParams(layoutParams);
-                    tbrow.addView(description);
-
-                    TextView event = new TextView(mContext);
-                    event.setText(String.valueOf(transaction.getEvent()));
-                    event.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                    event.setGravity(Gravity.CENTER);
-                    event.setLayoutParams(layoutParams);
-                    tbrow.addView(event);
-
-                    tableLayout.addView(tbrow);
+                allChores.clear();
+                choreNewArrayList.clear();
+                chorePendingArrayList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Chore chore = snapshot.getValue(Chore.class);
+                    chore.setKey(snapshot.getKey());
+                    allChores.add(chore);
                 }
+
+                for (Chore aChore : allChores) {
+                    if (aChore.getIsDone().equals("true")) {
+                        chorePendingArrayList.add(aChore);
+                    } else {
+                        choreNewArrayList.add(aChore);
+                    }
+                }
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                recyclerNewChores.setLayoutManager(layoutManager);
+                ChildNewChoreAdapter childNewChoreAdapter = new ChildNewChoreAdapter(choreNewArrayList);
+                recyclerNewChores.setAdapter(childNewChoreAdapter);
+
+                LinearLayoutManager layoutManagerPending = new LinearLayoutManager(getContext());
+                recyclerPendingChores.setLayoutManager(layoutManagerPending);
+                ChildPendingChoreAdapter childPendingChoreAdapter = new ChildPendingChoreAdapter(chorePendingArrayList);
+                recyclerPendingChores.setAdapter(childPendingChoreAdapter);
             }
 
             @Override
@@ -116,134 +111,30 @@ public class ChildChores extends Fragment {
             }
         });
 
-        notDoneRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        tblNotDone.removeAllViews();
-                        tblPending.removeAllViews();
-                        TableRow tbrow = new TableRow(mContext);
-                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
-                                1.0f);
-                        TextView icon = new TextView(mContext);
-                        icon.setText("To Do");
-                        icon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                        icon.setGravity(Gravity.CENTER);
-                        icon.setLayoutParams(layoutParams);
-                        tbrow.addView(icon);
-                        tblNotDone.addView(tbrow);
+        Query transactionRef = database.getReference("/transactions/" +
+                LoginActivity1.currentUser.getUsername()).orderByChild("time");
 
-                        TableRow tbrowPending = new TableRow(mContext);
-                        TableRow.LayoutParams layoutParamsPending = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
-                                1.0f);
-                        TextView pending = new TextView(mContext);
-                        pending.setText("Waiting for Payment");
-                        pending.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                        pending.setGravity(Gravity.CENTER);
-                        pending.setLayoutParams(layoutParamsPending);
-                        tbrowPending.addView(pending);
-                        tblPending.addView(tbrowPending);
-
-                        ArrayList<Chore> allChores = new ArrayList<>();
-                        ArrayList<Chore> notDoneChores = new ArrayList<>();
-                        ArrayList<Chore> pendingChores = new ArrayList<>();
-                        allChores.clear();
-                        notDoneChores.clear();
-                        pendingChores.clear();
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            Chore chore = snapshot.getValue(Chore.class);
-                            chore.setKey(snapshot.getKey());
-                            allChores.add(chore);
-                        }
-
-                        for (Chore aChore : allChores) {
-                            if (aChore.getIsDone().equals("true")) {
-                                pendingChores.add(aChore);
-                            } else {
-                                notDoneChores.add(aChore);
-                            }
-                        }
-                        addNotDoneChores(notDoneChores);
-                        addPending(pendingChores);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Toast.makeText(getActivity(), "sorry",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-    }
-    private void addNotDoneChores(ArrayList<Chore> chores){
-        for(final Chore chore : chores){
-            TableRow tbrow = new TableRow(mContext);
-            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
-                    1.0f);
-            TextView icon = new TextView(mContext);
-            icon.setText(String.valueOf(chore.getIcon()));
-            icon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            icon.setGravity(Gravity.CENTER);
-            icon.setLayoutParams(layoutParams);
-            tbrow.addView(icon);
-
-            TextView description = new TextView(mContext);
-            description.setText((chore.getDescription()));
-            description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            description.setGravity(Gravity.CENTER);
-            description.setWidth(200);
-            tbrow.addView(description);
-
-            TextView amount = new TextView(mContext);
-            amount.setText(String.valueOf(chore.getAmount()));
-            amount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            amount.setGravity(Gravity.CENTER);
-            amount.setLayoutParams(layoutParams);
-            tbrow.addView(amount);
-
-            Button btn = new Button(mContext);
-            btn.setText("Done");
-            tbrow.addView(btn);
-
-
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DatabaseReference notDoneRef = database.getReference("/chores/" +
-                            LoginActivity1.currentUser.getUsername() + "/" + chore.getKey());
-                    notDoneRef.setValue(chore.toMap());
+        //need to limit description chars
+        transactionRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Transaction transaction = snapshot.getValue(Transaction.class);
+                    transactionArrayList.add(transaction);
                 }
-            });
 
-            tblNotDone.addView(tbrow);
-        }
-    }
-    private void addPending(ArrayList<Chore> chores){
-        for (Chore chore : chores){
-            TableRow tbrow = new TableRow(mContext);
-            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
-                    1.0f);
-            TextView icon = new TextView(mContext);
-            icon.setText(String.valueOf(chore.getIcon()));
-            icon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            icon.setGravity(Gravity.CENTER);
-            icon.setLayoutParams(layoutParams);
-            tbrow.addView(icon);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                recyclerLog.setLayoutManager(layoutManager);
+                ChildLogAdapter childLogAdapter = new ChildLogAdapter(transactionArrayList);
+                recyclerLog.setAdapter(childLogAdapter);
+            }
 
-            TextView description = new TextView(mContext);
-            description.setText((chore.getDescription()));
-            description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            description.setGravity(Gravity.CENTER);
-            description.setWidth(200);
-            tbrow.addView(description);
-
-            TextView amount = new TextView(mContext);
-            amount.setText(String.valueOf(chore.getAmount()));
-            amount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            amount.setGravity(Gravity.CENTER);
-            tbrow.addView(amount);
-
-            tblPending.addView(tbrow);
-        }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(getActivity(), "sorry",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
