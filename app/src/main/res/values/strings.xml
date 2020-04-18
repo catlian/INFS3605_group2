@@ -4,7 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="thumbnail_image_view_desc">Youtube Video thumbnail image view</string>
-    <string name="question_string">What\'s the price of</string>
+    <string name="question_string">What\'s the price of a</string>
 
 
     <!--  we need to use video ids instead of video link  -->
@@ -29,30 +29,59 @@
     </string-array>
 
     <integer-array name="quiz_image_array">
-        <item>@drawable/book</item>
-        <item>@drawable/book</item>
-        <item>@drawable/book</item>
-        <item>@drawable/book</item>
-        <item>@drawable/book</item>
-        <item>@drawable/book</item>
-        <item>@drawable/book</item>
+        <item>@drawable/nintendoswitch</item>
+        <item>@drawable/couch</item>
+        <item>@drawable/lego</item>
+        <item>@drawable/bear</item>
+        <item>@drawable/picbook</item>
+        <item>@drawable/roastchicken</item>
+        <item>@drawable/paddlepop</item>
+        <item>@drawable/juicepops</item>
+        <item>@drawable/eggs</item>
+        <item>@drawable/milkcarton</item>
+        <item>@drawable/pencils</item>
+        <item>@drawable/crayons</item>
+        <item>@drawable/chips</item>
+        <item>@drawable/bread</item>
+        <item>@drawable/playdoh</item>
+        <item>@drawable/tissuebox</item>
+
     </integer-array>
     <string-array name="quiz_object_array">
-        <item>a</item>
-        <item>b</item>
-        <item>c</item>
-        <item>d</item>
-        <item>e</item>
-        <item>f</item>
-        <item>g</item>
+        <item>Nintendo Switch</item>
+        <item>couch</item>
+        <item>classic Lego</item>
+        <item>teddy bear</item>
+        <item>kid\'s book</item>
+        <item>roast chicken</item>
+        <item>box of ice cream</item>
+        <item>pack of juice pops</item>
+        <item>dozen eggs</item>
+        <item>2L milk</item>
+        <item>pack of crayons</item>
+        <item>pack of pencils</item>
+        <item>pack of chips</item>
+        <item>loaf of bread</item>
+        <item>tub of Play Doh</item>
+        <item>box of tissues</item>
     </string-array>
     <string-array name="quiz_price_array">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
+        <item>450</item>
+        <item>250</item>
+        <item>35</item>
+        <item>17</item>
+        <item>11</item>
+        <item>10</item>
         <item>5</item>
-        <item>6</item>
-        <item>7</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+
     </string-array>
 </resources>

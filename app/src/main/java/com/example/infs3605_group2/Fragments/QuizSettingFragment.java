@@ -20,6 +20,8 @@ import com.example.infs3605_group2.Activities.SavingsActivityBase;
 import com.example.infs3605_group2.Models.Question;
 import com.example.infs3605_group2.R;
 
+import org.w3c.dom.Text;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +33,6 @@ import java.util.Random;
 public class QuizSettingFragment extends Fragment {
     private Button btnStart;
     private TypedArray quizImageArray;
-//    List<String> videoIDArray = Arrays.asList(getResources().getStringArray(R.array.video_id_array));
 
     private String[] quizObjectArray;
     private String[] quizPriceArray;
@@ -60,14 +61,9 @@ public class QuizSettingFragment extends Fragment {
         quizObjectArray = getResources().getStringArray(R.array.quiz_object_array);
         quizPriceArray = getResources().getStringArray(R.array.quiz_price_array);
 
-        final TextView loadMsg = view.findViewById(R.id.loadMsg);
-        loadMsg.setVisibility(View.GONE);
-        Button btnStart = view.findViewById(R.id.btnStart);
-       //btnStart.setVisibility(View.GONE);
-        final ProgressBar progressBar=view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
+        btnStart = view.findViewById(R.id.btnStart);
+        btnStart.setEnabled(false);
         createQuestions();
-        System.out.println("done");
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,48 +72,47 @@ public class QuizSettingFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putSerializable("questions",(Serializable)questionArrayList);
                 intent.putExtra("BUNDLE",args);
-//                intent.putExtra("questions ", questionArrayList);
                 startActivity (intent);
             }
         });
 
-/*        btnSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int numQuestions = (Integer.parseInt(String.valueOf(spinner.getSelectedItem())));
-                loadMsg.setVisibility(View.VISIBLE);
-                loadMsg.setText("Please wait while we load your questions.");
-                progressBar.setVisibility(View.VISIBLE);
-                createQuestions(numQuestions, quizCategory);
-            }
-        });*/
-
     }
     public void createQuestions(){
-        List<Integer> intArray = Arrays.asList(0,1,2,3,4,5,6);
+        List<Integer> intArray = Arrays.asList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
         Collections.shuffle(intArray);
-        int numQuestions = 4;
+        int numQuestions = 8;
         List<Integer> randomSeries = intArray.subList(0, numQuestions);
         for(int i= 0; i<numQuestions-1; i++){
             Question question = new Question();
             question.setImage(quizImageArray.getResourceId(randomSeries.get(i), -1));
             question.setQuestion(getResources().getString(R.string.question_string) + " " +
                     quizObjectArray[randomSeries.get(i)] + "?");
-            question.setAnswer(quizPriceArray[randomSeries.get(i)]);
+            question.setAnswer("$"+quizPriceArray[randomSeries.get(i)]+".00");
             ArrayList<Integer> optionsArray = createOptions(Integer.parseInt(quizPriceArray[randomSeries.get(i)]));
-            question.setOption2(String.valueOf(optionsArray.get(0)));
-            question.setOption3(String.valueOf(optionsArray.get(1)));
-            question.setOption4(String.valueOf(optionsArray.get(2)));
+            question.setOption2("$"+ optionsArray.get(0) +".00");
+            question.setOption3("$"+ optionsArray.get(1) +".00");
+            question.setOption4("$"+ optionsArray.get(2) +".00");
             questionArrayList.add(question);
         }
+        btnStart.setEnabled(true);
     }
 
     public ArrayList<Integer> createOptions(int answer){
+        int increment = 0;
+        if(answer>=100){
+            increment = 30;
+        }
+        else if (answer >=20){
+            increment = 15;
+        }
+        else if (answer<20){
+            increment = 10;
+        }
         int minOption;
-        int maxOption = answer + 11;
-        if (answer-10 < 1){
+        int maxOption = answer + increment;
+        if (answer-increment < 1){
             minOption = 1;
-        } else {minOption = answer-10;}
+        } else {minOption = answer-increment;}
 
         ArrayList<Integer> optionsArrayList = new ArrayList<>();
         Random random = new Random();
@@ -129,22 +124,4 @@ public class QuizSettingFragment extends Fragment {
         }
         return optionsArrayList;
     }
-
-/*    @Override
-    public void handleQuestionResult(List<Question> questionList) {
-        Button button = getView().findViewById(R.id.startQuizButton);
-        TextView loadMsg = getView().findViewById(R.id.loadMsg);
-        loadMsg.setText("Your quiz is now ready!");
-        ProgressBar progressBar = getView().findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
-        button.setVisibility(View.VISIBLE);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), QuizActivity.class);
-                intent.putExtra("quizId", quizID);
-                startActivity(intent);
-            }
-        });
-    }*/
 }

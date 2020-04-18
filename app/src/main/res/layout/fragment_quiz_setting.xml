@@ -2,31 +2,38 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/loadMsg"
+        android:id="@+id/textView15"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="50dp"
-        android:text="Please wait while we load your questions."
+        android:gravity="center"
+        android:text="Guess the Price!"
+        android:textAppearance="@style/ChildTitleText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:text="In a few years you might be starting to pay for things on your own. Do you know much you would have to pay for everyday objects? Test yourself now with 8 multiple choice questions. Press 'Start Quiz!' to begin."
+        android:textAppearance="@style/ChildSubtitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loadMsg"
-        android:indeterminate="true" />
+        app:layout_constraintTop_toBottomOf="@id/textView15" />
 
     <Button
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Quiz!"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@id/textView16" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -99,7 +99,14 @@ public class QuizActivity extends AppCompatActivity{
             btnConfirm.setText("Confirm");
         }
         else{
-            checkOptions(questionList);
+            txtScore.setText("Quiz finished! Final score: " + scoreCount);
+            btnConfirm.setText("Close quiz");
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
         }
     }
     private List<String> getOptionsList(){
@@ -174,39 +181,4 @@ public class QuizActivity extends AppCompatActivity{
             }
         });
     }
-/*    @Override
-    //gets user objects from db, checks for high score to display toast, save updated values
-    public void handleUserResult(User user){
-        this.user = user;
-        highScore = user.getHighScore();
-        totalPoints = user.getTotalPoints();
-
-        if(scoreCount > highScore){
-            user.setHighScore(scoreCount);
-            Toast.makeText(QuizActivity.this, "Congrats that was a new high score!",
-                    Toast.LENGTH_SHORT).show();
-        }
-        totalPoints +=scoreCount;
-        user.setTotalPoints(totalPoints);
-
-        UpdateUserAsyncTask updateUserAsyncTask = new UpdateUserAsyncTask();
-        updateUserAsyncTask.setDatabase(database);
-        updateUserAsyncTask.setDelegate(QuizActivity.this);
-        updateUserAsyncTask.execute(user);
-    }
-
-    @Override
-    //display save success toast and finish activity
-    public void handleTaskResult(String string) {
-        final String message = string;
-        //slight delay to minimise toast overlap when high score congrats message displays
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(QuizActivity.this, message, Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }, 1500);
-
-    }*/
 }
