@@ -18,6 +18,7 @@ import com.example.infs3605_group2.Fragments.ChildChores;
 import com.example.infs3605_group2.Fragments.ChildLanding;
 import com.example.infs3605_group2.Fragments.ChildLog;
 import com.example.infs3605_group2.Fragments.ParentSavings;
+import com.example.infs3605_group2.Fragments.QuizSettingFragment;
 import com.example.infs3605_group2.Fragments.YoutubeFragment;
 import com.example.infs3605_group2.Fragments.YoutubeRecycler;
 import com.example.infs3605_group2.Fragments.YoutubeVideoAdapter;
@@ -111,7 +112,8 @@ public class ChildActivity extends AppCompatActivity  {
                         swapFragment(choreFragment);
                         break;
                     case R.id.gamesButton:
-                        swapFragment(landingFrag); //TODO: change this to game activity once game is made
+                        QuizSettingFragment quizSettingFragment = new QuizSettingFragment();
+                        swapFragment(quizSettingFragment); //TODO: change this to game activity once game is made
                         break;
                     case R.id.learnButton:
                         YoutubeRecycler videos = new YoutubeRecycler();

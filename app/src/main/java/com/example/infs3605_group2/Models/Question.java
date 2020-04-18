@@ -1,51 +1,37 @@
-/*
 package com.example.infs3605_group2.Models;
 
 
+import java.io.Serializable;
 
-public class Question {
+public class Question implements Serializable {
     private int questionId;
-    private String imageUrl;
+    private int image;
     private String question;
     private String answer;
     private String option2;
     private String option3;
     private String option4;
-    private int quizId;
 
 
     public Question(){}
 
     public Question(int questionId, String question, String answer, String option2, String option3,
-                    String option4, int quizId) {
+                    String option4, int image) {
         this.questionId = questionId;
         this.question = question;
         this.answer = answer;
         this.option2 = option2;
         this.option3 = option3;
         this.option4 = option4;
-        this.quizId = quizId;
+        this.image = image;
     }
 
-    public Question(int questionId, String question, String imageUrl, String answer, String option2, String option3,
-                    String option4, int quizId) {
-        this.questionId = questionId;
-        this.question = question;
-        this.answer = answer;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.option4 = option4;
-        this.quizId = quizId;
-        this.imageUrl=imageUrl;
+    public int getImage() {
+        return image;
     }
 
-
-    public int getQuizId() {
-        return quizId;
-    }
-
-    public void setQuizId(int quizId) {
-        this.quizId = quizId;
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public int getQuestionId() {
@@ -95,13 +81,4 @@ public class Question {
     public void setOption4(String option4) {
         this.option4 = option4;
     }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }
-*/

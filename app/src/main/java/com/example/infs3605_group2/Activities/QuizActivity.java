@@ -1,6 +1,6 @@
-/*
 package com.example.infs3605_group2.Activities;
 
+//code adapted from quiz in Catherine and Khodee's INFS3634 app
 //used https://codinginflow.com/tutorials/android/quiz-app-with-sqlite/part-5-quiz-activity as ref for some parts
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,25 +16,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.example.infs3634app.R;
-import com.example.infs3634app.database.AppDatabase;
-import com.example.infs3634app.database.GetQuestionsAsyncTask;
-import com.example.infs3634app.database.GetUserAsyncTask;
-import com.example.infs3634app.database.GetUserDelegate;
-import com.example.infs3634app.database.QuizDelegate;
-import com.example.infs3634app.database.UpdateUserAsyncTask;
-import com.example.infs3634app.database.UpdateUserDataDelegate;
-import com.example.infs3634app.model.ID;
-import com.example.infs3634app.model.Question;
-import com.example.infs3634app.model.User;
+import com.example.infs3605_group2.Models.Question;
+import com.example.infs3605_group2.Models.User;
+import com.example.infs3605_group2.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class QuizActivity extends AppCompatActivity implements UpdateUserDataDelegate,
-        GetUserDelegate, QuizDelegate {
+public class QuizActivity extends AppCompatActivity{
 
     private RadioGroup radioGroup;
     private RadioButton rbOne;
@@ -49,7 +39,7 @@ public class QuizActivity extends AppCompatActivity implements UpdateUserDataDel
     private int questionCount;
     private int scoreCount;
     private String answer;
-    private List<Question> questionList;
+    private ArrayList<Question> questionList;
     private int questionListSize;
     private Question currentQuestion;
     private ArrayList<String> optionsList = new ArrayList<>();
@@ -58,18 +48,19 @@ public class QuizActivity extends AppCompatActivity implements UpdateUserDataDel
     private User user;
     private int highScore;
     private int totalPoints;
-    private AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
         Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        questionList = (ArrayList<Question>) args.getSerializable("questions");
 
-        int quizId = intent.getIntExtra("quizId", 0);
+//        questionList = (ArrayList<Question>) intent.getSerializableExtra("questions");
 
         txtScore = findViewById(R.id.txtScore);
+        txtScore.setText("Score: 0");
         radioGroup = findViewById(R.id.radioGroup);
         rbOne = findViewById(R.id.btnOption1);
         rbTwo = findViewById(R.id.btnOption2);
@@ -79,13 +70,7 @@ public class QuizActivity extends AppCompatActivity implements UpdateUserDataDel
         btnConfirm = findViewById(R.id.btnConfirm);
         image = findViewById(R.id.imgQuestion);
 
-        database = AppDatabase.getInstance(getApplicationContext());
-        GetQuestionsAsyncTask getQuestionsAsyncTask = new GetQuestionsAsyncTask();
-        getQuestionsAsyncTask.setDatabase(database);
-        getQuestionsAsyncTask.setDelegate(QuizActivity.this);
-        getQuestionsAsyncTask.execute(quizId);
-
-
+        checkOptions(questionList);
     }
 
     private void showNextQuestion(){
@@ -101,10 +86,7 @@ public class QuizActivity extends AppCompatActivity implements UpdateUserDataDel
             answer = currentQuestion.getAnswer(); //get answer of current question
             //load question data
             txtQuestion.setText(currentQuestion.getQuestion());
-            if(currentQuestion.getImageUrl()!=null){
-                String imgUrl = currentQuestion.getImageUrl().replace("\\","");
-                Glide.with(this).load(imgUrl).into(image);
-            }
+            image.setImageResource(currentQuestion.getImage());
             //get the four answer options
             getOptionsList();
             rbOne.setText(optionsList.get(0));
@@ -117,11 +99,7 @@ public class QuizActivity extends AppCompatActivity implements UpdateUserDataDel
             btnConfirm.setText("Confirm");
         }
         else{
-            GetUserAsyncTask getUserAsyncTask = new GetUserAsyncTask();
-            getUserAsyncTask.setDatabase(database);
-            getUserAsyncTask.setDelegate(QuizActivity.this);
-            int id = ID.user_id;
-            getUserAsyncTask.execute(id);
+            checkOptions(questionList);
         }
     }
     private List<String> getOptionsList(){
@@ -137,6 +115,7 @@ public class QuizActivity extends AppCompatActivity implements UpdateUserDataDel
         Collections.shuffle(optionsList);
         return optionsList;
     }
+
     //method to check if the answer matches answer text and sets colour of answer options accordingly
     private void checkAnswer(){
         responded = true;
@@ -171,9 +150,8 @@ public class QuizActivity extends AppCompatActivity implements UpdateUserDataDel
         }
     }
 
-    @Override
     //gets list of questions and shuffles them for random order
-    public void handleQuestionResult(List<Question> questionList) {
+    public void checkOptions(ArrayList<Question> questionList) {
         this.questionList = questionList;
         Collections.shuffle(questionList);
         questionListSize = questionList.size();
@@ -196,7 +174,7 @@ public class QuizActivity extends AppCompatActivity implements UpdateUserDataDel
             }
         });
     }
-    @Override
+/*    @Override
     //gets user objects from db, checks for high score to display toast, save updated values
     public void handleUserResult(User user){
         this.user = user;
@@ -230,6 +208,5 @@ public class QuizActivity extends AppCompatActivity implements UpdateUserDataDel
             }
         }, 1500);
 
-    }
+    }*/
 }
-*/

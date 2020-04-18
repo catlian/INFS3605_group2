@@ -1,7 +1,7 @@
-/*
 package com.example.infs3605_group2.Fragments;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,20 +14,28 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.infs3605_group2.Activities.QuizActivity;
+import com.example.infs3605_group2.Activities.SavingsActivity;
+import com.example.infs3605_group2.Activities.SavingsActivityBase;
+import com.example.infs3605_group2.Models.Question;
+import com.example.infs3605_group2.R;
+
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
-public class QuizSettingFragment extends Fragment implements QuizDelegate {
-    private int quizID;
-    private String quizDescriptionString;
-    private String quizNameString;
-    private String quizCategory;
-    private Button btnSelect;
+public class QuizSettingFragment extends Fragment {
+    private Button btnStart;
+    private TypedArray quizImageArray;
+//    List<String> videoIDArray = Arrays.asList(getResources().getStringArray(R.array.video_id_array));
 
-    int numQuestionsCreated;
-    Question question = new Question();
+    private String[] quizObjectArray;
+    private String[] quizPriceArray;
+
     ArrayList<Question> questionArrayList = new ArrayList<>();
 
     public QuizSettingFragment() {
@@ -37,13 +45,6 @@ public class QuizSettingFragment extends Fragment implements QuizDelegate {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            quizID = getArguments().getInt("QUIZ_ID");
-            quizNameString = getArguments().getString("QUIZ_NAME");
-            quizCategory = getArguments().getString("QUIZ_CAT");
-            quizDescriptionString = getArguments().getString("QUIZ_DESCRIPTION");
-        }
-        numQuestionsCreated = 0;
     }
 
     @Override
@@ -55,29 +56,32 @@ public class QuizSettingFragment extends Fragment implements QuizDelegate {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceBundle) {
-        TextView quizName = view.findViewById(R.id.quizName);
-        TextView quizDescription = view.findViewById(R.id.quizDescription);
-        quizName.setText(quizNameString);
-        quizDescription.setText(quizDescriptionString);
+        quizImageArray = getResources().obtainTypedArray(R.array.quiz_image_array);
+        quizObjectArray = getResources().getStringArray(R.array.quiz_object_array);
+        quizPriceArray = getResources().getStringArray(R.array.quiz_price_array);
 
         final TextView loadMsg = view.findViewById(R.id.loadMsg);
         loadMsg.setVisibility(View.GONE);
-        Button startQuizButton = view.findViewById(R.id.startQuizButton);
-        startQuizButton.setVisibility(View.GONE);
+        Button btnStart = view.findViewById(R.id.btnStart);
+       //btnStart.setVisibility(View.GONE);
         final ProgressBar progressBar=view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
+        createQuestions();
+        System.out.println("done");
 
-        final Spinner spinner = view.findViewById(R.id.numQuestionsSpinner);
-        btnSelect = view.findViewById(R.id.selectNumQuestions);
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), QuizActivity.class);
+                Bundle args = new Bundle();
+                args.putSerializable("questions",(Serializable)questionArrayList);
+                intent.putExtra("BUNDLE",args);
+//                intent.putExtra("questions ", questionArrayList);
+                startActivity (intent);
+            }
+        });
 
-        Integer[] numQuestions = new Integer[]{5, 10, 15, 20};
-
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>
-                (getContext(), android.R.layout.simple_spinner_item, numQuestions);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        btnSelect.setOnClickListener(new View.OnClickListener() {
+/*        btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int numQuestions = (Integer.parseInt(String.valueOf(spinner.getSelectedItem())));
@@ -86,127 +90,47 @@ public class QuizSettingFragment extends Fragment implements QuizDelegate {
                 progressBar.setVisibility(View.VISIBLE);
                 createQuestions(numQuestions, quizCategory);
             }
-        });
+        });*/
 
     }
-*/
-/*
-The way this part works:
-    1) create question options by randomly generating 4 drinks.
-        1a) the first drink's name & image will be used as the answer & question.
-        1b) the 2nd-4th drinks' names will be used as options.
-            This is done as a loop of the volley query which checks how many options have already been made
-    2) after question options are created (i.e. looped 3 times to create 3 other options),
-        load the question into an array list
-    3) repeat above 2 steps until all questions have arrived in the array list.
-        asynctask will insert the questions into the database
-    4) once this operation is done, go to quiz activity with the quizID (which will retrieve those questions)
-Unfortunately, it does take a long time to go through this process which is why we included the
-loading text & progress bar.
-Possible improvements could be to upload question by question instead of waiting for the whole
-list of questions, and start the quiz once 2-3 questions have already been uploaded. However, there is
-the risk of the user completing those questions too quickly so the other questions won't load in time.
- *//*
-
-    public void createQuestions(final int numQuestions, String quizCategory) {
-        createQuestionAnswer(numQuestions, quizCategory);
+    public void createQuestions(){
+        List<Integer> intArray = Arrays.asList(0,1,2,3,4,5,6);
+        Collections.shuffle(intArray);
+        int numQuestions = 4;
+        List<Integer> randomSeries = intArray.subList(0, numQuestions);
+        for(int i= 0; i<numQuestions-1; i++){
+            Question question = new Question();
+            question.setImage(quizImageArray.getResourceId(randomSeries.get(i), -1));
+            question.setQuestion(getResources().getString(R.string.question_string) + " " +
+                    quizObjectArray[randomSeries.get(i)] + "?");
+            question.setAnswer(quizPriceArray[randomSeries.get(i)]);
+            ArrayList<Integer> optionsArray = createOptions(Integer.parseInt(quizPriceArray[randomSeries.get(i)]));
+            question.setOption2(String.valueOf(optionsArray.get(0)));
+            question.setOption3(String.valueOf(optionsArray.get(1)));
+            question.setOption4(String.valueOf(optionsArray.get(2)));
+            questionArrayList.add(question);
+        }
     }
 
-    private void createQuestionAnswer(final int numQuestions, String quizCategory) {
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                //set answer, option1, option 2, etc.
-                //create question
-                //insert questions async task
-                DrinksImport drinksImport = new Gson().fromJson(response, DrinksImport.class);
-                ArrayList<Drinks> drinksList = drinksImport.getDrinks();
-                Collections.shuffle(drinksList);
-                Drinks selectedDrink = drinksList.get(0);
-                question.setAnswer(selectedDrink.getStrDrink());
-                String drinkImage = selectedDrink.getStrDrinkThumb();
-                question.setImageUrl(drinkImage);
-                createOptions(numQuestions);
+    public ArrayList<Integer> createOptions(int answer){
+        int minOption;
+        int maxOption = answer + 11;
+        if (answer-10 < 1){
+            minOption = 1;
+        } else {minOption = answer-10;}
+
+        ArrayList<Integer> optionsArrayList = new ArrayList<>();
+        Random random = new Random();
+        while (optionsArrayList.size() < 4 ){
+            int option = random.nextInt((maxOption - minOption) + 1) + minOption;
+            if (!optionsArrayList.contains(option) && (option != answer) ){
+                optionsArrayList.add(option);
             }
-        };
-        Response.ErrorListener errorListener = new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("Request failed");
-            }
-        };
-        String url = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=" + quizCategory;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener, errorListener);
-        requestQueue.add(stringRequest);
+        }
+        return optionsArrayList;
     }
 
-    int numOptions=1;
-    private void createOptions(final int numQuestions) {
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                DrinksImport drinksImport = new Gson().fromJson(response, DrinksImport.class);
-                ArrayList<Drinks> drinksList = drinksImport.getDrinks();
-                Collections.shuffle(drinksList);
-                Drinks selectedDrink = drinksList.get(0);
-                switch (numOptions) {
-                    case 1:
-                        question.setOption2(selectedDrink.getStrDrink());
-                        break;
-                    case 2:
-                        question.setOption3(selectedDrink.getStrDrink());
-                        break;
-                    case 3:
-                        question.setOption4(selectedDrink.getStrDrink());
-                        break;
-                }
-
-                if(numOptions>=4){
-                    question.setQuizId(quizID);
-                    question.setQuestion("What is this drink?");
-                    question.setQuestionId(0);
-                    questionArrayList.add(question);
-                    question = new Question();
-                    numOptions=1;
-                    numQuestionsCreated++;
-                    if(numQuestionsCreated>=numQuestions){
-                        Question[] arrayQuestions = new Question[numQuestions];
-                        for(int i=0;i<arrayQuestions.length;i++){
-                            arrayQuestions[i]=questionArrayList.get(i);
-                        }
-                        AppDatabase db = AppDatabase.getInstance(getContext());
-                        InsertQuestionAsyncTask insertQuestionAsyncTask = new InsertQuestionAsyncTask();
-                        insertQuestionAsyncTask.setDatabase(db);
-                        insertQuestionAsyncTask.setDelegate(QuizSettingFragment.this);
-                        insertQuestionAsyncTask.setQuizID(quizID);
-                        insertQuestionAsyncTask.execute(arrayQuestions);
-                    }
-                    else{
-                        createQuestionAnswer(numQuestions, quizCategory);
-                    }
-                }
-                else{
-                    numOptions++;
-                    createOptions(numQuestions);
-                }
-            }
-        };
-
-        Response.ErrorListener errorListener = new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("Request failed");
-            }
-        };
-        String url = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=" + quizCategory;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener, errorListener);
-        requestQueue.add(stringRequest);
-    }
-
-    @Override
+/*    @Override
     public void handleQuestionResult(List<Question> questionList) {
         Button button = getView().findViewById(R.id.startQuizButton);
         TextView loadMsg = getView().findViewById(R.id.loadMsg);
@@ -222,6 +146,5 @@ the risk of the user completing those questions too quickly so the other questio
                 startActivity(intent);
             }
         });
-    }
+    }*/
 }
-*/
