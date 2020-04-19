@@ -1,13 +1,18 @@
 package com.example.infs3605_group2.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +29,11 @@ import com.example.infs3605_group2.Fragments.YoutubeRecycler;
 import com.example.infs3605_group2.Fragments.YoutubeVideoAdapter;
 import com.example.infs3605_group2.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ChildActivity extends AppCompatActivity  {
 
@@ -51,46 +61,65 @@ public class ChildActivity extends AppCompatActivity  {
 
         swapFragment(landingFrag);
 
-        /*btnLanding = findViewById(R.id.btnLanding);
-        btnLanding.setOnClickListener(new View.OnClickListener() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference choresRef = database.getReference().child("chores").
+                child(LoginActivity1.currentUser.getUsername());
+        choresRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onClick(View v) {
-                ChildLanding landingFrag = new ChildLanding();
-                swapFragment(landingFrag);
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                addNotification("chore");
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+        DatabaseReference transactionRef = database.getReference().child("transactions").
+                child(LoginActivity1.currentUser.getUsername());
+        transactionRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                addNotification("transaction");
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
-        btnLog = findViewById(R.id.btnLog);
-        btnLog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChildLog log = new ChildLog();
-                swapFragment(log);
-            }
-        });
-        btnChore = findViewById(R.id.btnChores);
-        btnChore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChildChores chores = new ChildChores();
-                swapFragment(chores);
-            }
-        });
-        btnSavings = findViewById(R.id.btnSavingsGoal);
-        btnSavings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParentSavings savings = new ParentSavings();
-                swapFragment(savings);
-            }
-        });
-        btnVideos = findViewById(R.id.btnVideos);
-        btnVideos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                YoutubeRecycler videos = new YoutubeRecycler();
-                swapFragment(videos);
-            }
-        });*/
 
         //setting navigation items destination paths when clicked
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavBar);
@@ -132,31 +161,39 @@ public class ChildActivity extends AppCompatActivity  {
         fragmentTransaction.commit();
     }
 
-    /*@Override
-    p{
-        YouTubePlayerSupportFragment youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
+    public static Context getAppContext(){
+        return mInstance.getApplicationContext();
+    }
+    //https://developer.android.com/training/notify-user/build-notification
+    public void addNotification(String type) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        String id = "";
+        NotificationManager notificationManager = this.getSystemService(NotificationManager.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            id = "dollaroo_channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(id, "DollarooChannel", importance);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            notificationManager.createNotificationChannel(channel);
+        }
+        if(type.equals("chore")){
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
+                    .setSmallIcon(R.drawable.kangarootwo)
+                    .setContentTitle("New Chore")
+                    .setContentText(LoginActivity1.currentUser.getLinkedAccount() + " has added a new chore!")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            notificationManager.notify(1 /* ID of notification */, builder.build());
+        }
+        else if(type.equals("transaction")){
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
+                    .setSmallIcon(R.drawable.kangarootwo)
+                    .setContentTitle("Balance Change")
+                    .setContentText("Your balance has changed!")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            notificationManager.notify(1 /* ID of notification */, builder.build());
+        }
 
-        youTubePlayerFragment.initialize("DEVELOPER_KEY", new OnInitializedListener() {
-
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
-
-                if (!wasRestored) {
-                    YPlayer = player;
-                    YPlayer.setFullscreen(true);
-                    YPlayer.loadVideo("2zNSgSzhBfM");
-                    YPlayer.play();
-                }
-
-            }
-
-            @Override
-            public void onInitializationFailure(Provider arg0, YouTubeInitializationResult arg1) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.youtube_fragment, youTubePlayerFragment).commit();
-    }*/
+    }
 }

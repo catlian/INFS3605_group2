@@ -118,6 +118,7 @@ public class ChildChores extends Fragment {
         transactionRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                transactionArrayList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Transaction transaction = snapshot.getValue(Transaction.class);
                     transactionArrayList.add(transaction);

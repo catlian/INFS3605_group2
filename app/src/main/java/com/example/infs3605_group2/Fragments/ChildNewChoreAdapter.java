@@ -1,7 +1,11 @@
 package com.example.infs3605_group2.Fragments;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +17,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infs3605_group2.Activities.ChildActivity;
 import com.example.infs3605_group2.Activities.LoginActivity1;
 import com.example.infs3605_group2.Models.Chore;
 import com.example.infs3605_group2.Models.Transaction;
@@ -96,5 +102,6 @@ public class ChildNewChoreAdapter extends RecyclerView.Adapter<ChildNewChoreAdap
             });
         }
     }
+
 }
 
