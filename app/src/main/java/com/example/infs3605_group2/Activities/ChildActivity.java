@@ -60,7 +60,7 @@ public class ChildActivity extends AppCompatActivity  {
         final ChildLanding landingFrag = new ChildLanding();
 
         swapFragment(landingFrag);
-
+        addNotification("login");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference choresRef = database.getReference().child("chores").
                 child(LoginActivity1.currentUser.getUsername());
@@ -183,6 +183,14 @@ public class ChildActivity extends AppCompatActivity  {
                     .setSmallIcon(R.drawable.kangarootwo)
                     .setContentTitle("New Chore")
                     .setContentText(LoginActivity1.currentUser.getLinkedAccount() + " has added a new chore!")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            notificationManager.notify(1 /* ID of notification */, builder.build());
+        }
+        if(type.equals("login")){
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
+                    .setSmallIcon(R.drawable.kangarootwo)
+                    .setContentTitle("You have just logged in")
+                    .setContentText("Hi " + LoginActivity1.currentUser.getUsername() + ", please be careful of any strangers around you when using this app, stay safe!")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
             notificationManager.notify(1 /* ID of notification */, builder.build());
         }

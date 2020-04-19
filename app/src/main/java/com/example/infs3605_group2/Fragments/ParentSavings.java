@@ -46,11 +46,12 @@ public class ParentSavings extends Fragment {
     private DatabaseReference nameRef;
     private DatabaseReference goalRef;
     private DatabaseReference pictureRef;
+    private DatabaseReference balanceRef;
     private String name1;
     private String goal1;
     private String pic1;
-    private long number;
-    private long number2;
+    private double number;
+    private double number2;
 
     public ParentSavings() {
         // Required empty public constructor
@@ -78,7 +79,10 @@ public class ParentSavings extends Fragment {
         savePic = view.findViewById(R.id.imageView_SavingsPic);
         savePic.setVisibility(View.INVISIBLE);
         final ProgressBar simpleProgressBar=(ProgressBar)view.findViewById(R.id.simpleProgressBar); // initiate the progress bar
-        simpleProgressBar.setBackgroundColor(Color.BLACK); // black background color for the progress bar
+        simpleProgressBar.setBackgroundColor(Color.GRAY); // black background color for the progress bar
+        if (LoginActivity1.currentUser.getUserType()=="parent"){
+            simpleProgressBar.setVisibility(View.GONE);
+        }
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,20 +123,37 @@ public class ParentSavings extends Fragment {
                 goal1 = dataSnapshot.getValue(String.class);
                 goal.setText("$" + goal1);
                 number = Integer.parseInt(goal1);
-                number2 = (long) LoginActivity1.currentUser.getBalance();
-                if (number2 > number){
-                    number = number2;
-                }
-                if (number2 != 0) {
-                    simpleProgressBar.setProgress((int) (number / number2));
-                }
             }
+
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Toast.makeText(getActivity(), "sorry",
                         Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        balanceRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("balance");
+        balanceRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                number2 = (double)(dataSnapshot.getValue(Integer.class));
+                if (number2 > number){
+                    number = number2;
+                }
+                if (number != 0) {
+                    double fraction = number2/number;
+                    simpleProgressBar.setProgress((int)(fraction * 100));
+                }
+                if (number2 == number){
+                    Toast.makeText(getActivity(), "Congratulations! You've met your savings goal :)",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
