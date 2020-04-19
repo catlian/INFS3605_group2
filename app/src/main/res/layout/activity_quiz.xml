@@ -32,7 +32,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textAppearance="@style/ChildSubtitle" />
+                android:textAppearance="@style/ChildSubtitle"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
@@ -77,15 +78,20 @@
                 android:layout_marginBottom="4dp"
                 android:text="Score: "
                 android:textAlignment="center"
-                android:textAppearance="@style/ChildSubtitle" />
+                android:textAppearance="@style/ChildSubtitle"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bigdarkbuton"
                 android:gravity="center"
                 android:text="Confirm"
-                android:textAppearance="@style/ChildSubtitle"/>
+                android:textAppearance="@style/ChildSubtitle"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 
