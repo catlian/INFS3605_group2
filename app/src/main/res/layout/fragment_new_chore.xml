@@ -10,18 +10,17 @@
 
     <TextView
         android:id="@+id/lblParentBalance6"
-        android:layout_width="133dp"
-        android:layout_height="91dp"
+        android:layout_width="153dp"
+        android:layout_height="49dp"
         android:fontFamily="@font/arial"
         android:text="Add a Chore"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/amount"

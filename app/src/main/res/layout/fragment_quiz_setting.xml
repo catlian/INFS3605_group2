@@ -8,32 +8,64 @@
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="967dp"
+        android:layout_height="56dp"
+        android:background="@drawable/yellowheader"
+        android:fontFamily="@font/arial"
         android:gravity="center"
-        android:text="Guess the Price!"
-        android:textAppearance="@style/ChildTitleText"
+        android:textAppearance="@style/ParentTitleText"
+        android:textColor="#4E4949"
+        android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="952dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="144dp"
         android:gravity="center"
         android:inputType="textMultiLine"
         android:text="In a few years you might be starting to pay for things on your own. Do you know much you would have to pay for everyday objects? Test yourself now with 8 multiple choice questions. Press 'Start Quiz!' to begin."
         android:textAppearance="@style/ChildSubtitle"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView15" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.009" />
 
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="149dp"
+        android:layout_height="76dp"
+        android:background="@drawable/biggreenbutton"
+        android:fontFamily="@font/helvetica"
         android:text="Start Quiz!"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView16" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.861" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/arial"
+        android:text="Guess the Price!"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="@+id/textView15"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -140,13 +140,13 @@ public class QuizActivity extends AppCompatActivity{
         rbFour.setTextColor(Color.RED);
 
         if(answer.equals(rbOne.getText())){
-            rbOne.setTextColor(Color.GREEN);
+            rbOne.setTextColor(Color.rgb(76, 187, 23));
         }else if(answer.equals(rbTwo.getText())){
-            rbTwo.setTextColor(Color.GREEN);
+            rbTwo.setTextColor(Color.rgb(76, 187, 23));
         }else if(answer.equals(rbThree.getText())){
-            rbThree.setTextColor(Color.GREEN);
+            rbThree.setTextColor(Color.rgb(76, 187, 23));
         }else if(answer.equals(rbFour.getText())){
-            rbFour.setTextColor(Color.GREEN);
+            rbFour.setTextColor(Color.rgb(76, 187, 23));
         }
 
         //sets text of button to be next/save reuslts depending on whether that was last question
