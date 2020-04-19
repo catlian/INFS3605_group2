@@ -123,6 +123,11 @@ public class ParentSavings extends Fragment {
                 goal1 = dataSnapshot.getValue(String.class);
                 goal.setText("$" + goal1);
                 number = Integer.parseInt(goal1);
+                if (number != 0) {
+                    double fraction = number2/number;
+                    simpleProgressBar.setProgress((int)(fraction * 100));
+                }
+
             }
 
 
@@ -139,9 +144,9 @@ public class ParentSavings extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 number2 = (double)(dataSnapshot.getValue(Integer.class));
-                if (number2 > number){
+                /*if (number2 > number){
                     number = number2;
-                }
+                }*/
                 if (number != 0) {
                     double fraction = number2/number;
                     simpleProgressBar.setProgress((int)(fraction * 100));
