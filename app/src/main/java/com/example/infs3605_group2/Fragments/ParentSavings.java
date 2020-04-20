@@ -52,7 +52,7 @@ public class ParentSavings extends Fragment {
     private String pic1;
     private double number;
     private double number2;
-
+    private TextView progressMsg;
     public ParentSavings() {
         // Required empty public constructor
     }
@@ -78,10 +78,12 @@ public class ParentSavings extends Fragment {
         goal = view.findViewById(R.id.textView_amount);
         savePic = view.findViewById(R.id.imageView_SavingsPic);
         savePic.setVisibility(View.INVISIBLE);
+        progressMsg = view.findViewById(R.id.textView_YourProgress);
         final ProgressBar simpleProgressBar=(ProgressBar)view.findViewById(R.id.simpleProgressBar); // initiate the progress bar
         simpleProgressBar.setBackgroundColor(Color.GRAY); // black background color for the progress bar
-        if (LoginActivity1.currentUser.getUserType()=="parent"){
+        if (LoginActivity1.currentUser.getUserType().equals("parent")){
             simpleProgressBar.setVisibility(View.GONE);
+            progressMsg.setVisibility((View.GONE));
         }
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
