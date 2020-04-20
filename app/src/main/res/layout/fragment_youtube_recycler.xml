@@ -55,6 +55,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/book" />
 
+        <Button
+            android:id="@+id/button_glossary"
+            android:layout_width="107dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="20dp"
+            android:background="#68CA6D"
+            android:backgroundTintMode="multiply"
+            android:text="Glossary"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
