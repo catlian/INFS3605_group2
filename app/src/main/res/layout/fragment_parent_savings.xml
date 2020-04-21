@@ -17,6 +17,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/savings"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
@@ -32,25 +44,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="50px"
-            android:layout_height="50px"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="4dp"
-            android:src="@drawable/savings"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btnCreate"
-        android:layout_width="106dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="97dp"
+        android:layout_height="52dp"
         android:layout_weight="1"
         android:background="@drawable/biggreenbutton"
         android:fontFamily="@font/helvetica"
@@ -58,56 +57,56 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/simpleProgressBar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_amount" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.687" />
 
     <TextView
         android:id="@+id/textView_name"
         android:layout_width="236dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:fontFamily="@font/helvetica"
         android:text="Savings Goal"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_amount"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_SavingsPic" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_amount"
         android:layout_width="239dp"
         android:layout_height="26dp"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:fontFamily="@font/helvetica"
         android:text="Amount"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreate"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_name" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.555" />
 
     <ImageView
         android:id="@+id/imageView_SavingsPic"
         android:layout_width="161dp"
         android:layout_height="146dp"
-        android:layout_marginTop="16dp"
         android:src="@drawable/ic_menu_camera"
-        app:layout_constraintBottom_toTopOf="@+id/textView_name"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.191" />
 
     <ProgressBar
         android:id="@+id/simpleProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="327dp"
         android:layout_height="38dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="28dp"
         android:max="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,14 +117,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="22dp"
-        android:layout_marginTop="79dp"
         android:text="Your progress"
         android:textAppearance="@style/ChildSubtitle"
-        app:layout_constraintBottom_toTopOf="@+id/simpleProgressBar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnCreate"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.871" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

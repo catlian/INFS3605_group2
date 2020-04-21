@@ -20,13 +20,16 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="23dp"
         android:layout_marginBottom="23dp"
+        android:layout_marginEnd="23dp"
+        android:background="#3C3C3C"
+        android:backgroundTint="#3C3C3C"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_add"
-        app:backgroundTint="@color/common_google_signin_btn_text_light_pressed" />
+        app:backgroundTint="#3C3C3C"
+        app:rippleColor="#3C3C3C" />
 
 </RelativeLayout>
