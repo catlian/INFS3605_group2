@@ -75,7 +75,7 @@ public class ChildNewChoreAdapter extends RecyclerView.Adapter<ChildNewChoreAdap
         public TextView txtAmount;
         public Button button;
         public LinearLayout linearLayout;
-        public int iconNum;
+        public String iconNum;
         public String vacuum ="https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/uploads%2Fvacuuming.png?alt=media&token=366dc917-0ca0-4bed-a28a-6062631013ea";
         public String broom = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/uploads%2Fbroomstick.png?alt=media&token=20d78473-fd36-4c94-aef9-c927ab14f74d";
         public String wash = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/uploads%2Fdishwashing.png?alt=media&token=acc63636-4bf2-44dc-bd59-689ab3ddc860";
@@ -106,13 +106,13 @@ public class ChildNewChoreAdapter extends RecyclerView.Adapter<ChildNewChoreAdap
                 }
             });
             switch (iconNum) {
-                case 1:
+                case "Cleaning":
                     Picasso.get().load(vacuum).into(icon);
                     break;
-                case 2:
+                case "Sweeping":
                     Picasso.get().load(broom).into(icon);
                     break;
-                case 3:
+                case "Washing":
                     Picasso.get().load(wash).into(icon);
                     break;
             }

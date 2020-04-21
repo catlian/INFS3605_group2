@@ -9,14 +9,14 @@ import java.util.Map;
 public class Chore implements Serializable {
     private double amount;
     private String description;
-    private int icon;
+    private String icon;
     private String isDone;
     private String key;
 
     public Chore() {
     }
 
-    public Chore(double amount, String description, int icon, String isDone, String key) {
+    public Chore(double amount, String description, String icon, String isDone, String key) {
         this.amount = amount;
         this.description = description;
         this.icon = icon;
@@ -48,11 +48,11 @@ public class Chore implements Serializable {
         this.description = description;
     }
 
-    public int getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(int icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 

@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,9 +123,9 @@ public class ParentChoreView extends Fragment{
         final EditText txtAmount = createChoreDialogView.findViewById(R.id.txtAmount);
         final Spinner spinnerIcon = createChoreDialogView.findViewById(R.id.spinnerIcon);
 
-        Integer[] ids = new Integer[]{1,2,3};
-      //  String[] ids = new String[]{"Cleaning","Sweeping","Washing"};
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>
+      //  Integer[] ids = new Integer[]{1,2,3};
+        String[] ids = new String[]{"Cleaning","Sweeping","Washing"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (getContext(),android.R.layout.simple_spinner_item, ids);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerIcon.setAdapter(adapter);
@@ -133,18 +134,27 @@ public class ParentChoreView extends Fragment{
         createChoreDialogView.findViewById(R.id.btnCreate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Chore chore = new Chore();
-                chore.setAmount(Double.valueOf(txtAmount.getText().toString()));
-                chore.setDescription(txtDescription.getText().toString());
-                chore.setIcon(Integer.valueOf(spinnerIcon.getSelectedItem().toString()));
-                chore.setIsDone("false");
+                if (TextUtils.isEmpty(txtDescription.getText().toString())) {
+                    Toast.makeText(getActivity(), "Missing Description", Toast.LENGTH_SHORT).show();
+                }
+                else if (TextUtils.isEmpty(txtAmount.getText().toString())) {
+                    Toast.makeText(getActivity(), "Missing Amount", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Chore chore = new Chore();
+                    chore.setAmount(Double.valueOf(txtAmount.getText().toString()));
+                    chore.setDescription(txtDescription.getText().toString());
+                    // chore.setIcon(Integer.valueOf(spinnerIcon.getSelectedItem().toString()));
+                    chore.setIcon((spinnerIcon.getSelectedItem().toString()));
+                    chore.setIsDone("false");
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference choreRef = database.getReference().child("chores").
-                        child(LoginActivity1.currentUser.getLinkedAccount());
-                choreRef.push().setValue(chore);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference choreRef = database.getReference().child("chores").
+                            child(LoginActivity1.currentUser.getLinkedAccount());
+                    choreRef.push().setValue(chore);
 
-                createChoreDialog.dismiss();
+                    createChoreDialog.dismiss();
+                }
             }
         });
         createChoreDialogView.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
