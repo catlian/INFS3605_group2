@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,15 +111,24 @@ public class ParentOtherTransactions extends Fragment {
             @Override
             public void onClick(View v) {
                 hideSoftKeyboard();
-                amount = Double.parseDouble(txtAmount.getText().toString()); //NEED TO VALIDTE INT ONLY
-                if(validateBalance(parentBalance)){
-                    childBalanceRef.setValue(childBalance + amount);
-                    parentBalanceRef.setValue(parentBalance - amount);
-                    pushTransaction("+");
+                if (TextUtils.isEmpty(txtMessage.getText().toString())) {
+                    Toast.makeText(getActivity(), "Missing Message", Toast.LENGTH_SHORT).show();
                 }
-                else{
-                    Toast.makeText(getActivity(), "mum u need more money",
-                            Toast.LENGTH_SHORT).show();
+                else if (TextUtils.isEmpty(txtAmount.getText().toString())) {
+                    Toast.makeText(getActivity(), "Missing Amount", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    amount = Double.parseDouble(txtAmount.getText().toString()); //NEED TO VALIDTE INT ONLY
+                    if (validateBalance(parentBalance)) {
+                        childBalanceRef.setValue(childBalance + amount);
+                        parentBalanceRef.setValue(parentBalance - amount);
+                        Toast.makeText(getActivity(), "Money Sent",
+                                Toast.LENGTH_SHORT).show();
+                        pushTransaction("+");
+                    } else {
+                        Toast.makeText(getActivity(), "mum u need more money",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -127,18 +137,25 @@ public class ParentOtherTransactions extends Fragment {
             @Override
             public void onClick(View v) {
                 hideSoftKeyboard();
-                amount = Double.parseDouble(txtAmount.getText().toString());
-                double roundOff = Math.round(amount * 100.0) / 100.0;
-                System.out.println(roundOff);
-                System.out.format("%.4f", amount);
-                if(validateBalance(childBalance)){
-                    childBalanceRef.setValue(childBalance - roundOff);
-                    parentBalanceRef.setValue(parentBalance + roundOff);
-                    pushTransaction("-");
-                }
-                else{
-                    Toast.makeText(getActivity(), "mum ur kid doesnt even have that much??",
-                            Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(txtMessage.getText().toString())) {
+                    Toast.makeText(getActivity(), "Missing Message", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(txtAmount.getText().toString())) {
+                    Toast.makeText(getActivity(), "Missing Amount", Toast.LENGTH_SHORT).show();
+                } else {
+                    amount = Double.parseDouble(txtAmount.getText().toString());
+                    double roundOff = Math.round(amount * 100.0) / 100.0;
+                    System.out.println(roundOff);
+                    System.out.format("%.4f", amount);
+                    if (validateBalance(childBalance)) {
+                        childBalanceRef.setValue(childBalance - roundOff);
+                        parentBalanceRef.setValue(parentBalance + roundOff);
+                        pushTransaction("-");
+                        Toast.makeText(getActivity(), "Money Retrieved",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "mum ur kid doesnt even have that much??",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
