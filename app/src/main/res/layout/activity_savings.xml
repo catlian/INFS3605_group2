@@ -68,8 +68,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_goal"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.777" />
 
     <Button
         android:id="@+id/button_create"
@@ -91,9 +91,9 @@
 
     <EditText
         android:id="@+id/editText_name"
-        android:layout_width="249dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="246dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="44dp"
         android:fontFamily="@font/helvetica"
         android:hint="Name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,9 +103,9 @@
 
     <EditText
         android:id="@+id/editText_goal"
-        android:layout_width="249dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="246dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/helvetica"
         android:hint="Goal"
         android:inputType="number"
