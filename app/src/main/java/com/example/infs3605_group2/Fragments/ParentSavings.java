@@ -81,10 +81,10 @@ public class ParentSavings extends Fragment {
         progressMsg = view.findViewById(R.id.textView_YourProgress);
         final ProgressBar simpleProgressBar=(ProgressBar)view.findViewById(R.id.simpleProgressBar); // initiate the progress bar
         simpleProgressBar.setBackgroundColor(Color.GRAY); // black background color for the progress bar
-        if (LoginActivity1.currentUser.getUserType().equals("parent")){
-            simpleProgressBar.setVisibility(View.GONE);
-            progressMsg.setVisibility((View.GONE));
+        if (LoginActivity1.currentUser.getUserType().equals("parent")) {
+            progressMsg.setText(LoginActivity1.currentUser.getLinkedAccount() + "'s progress");
         }
+
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +98,6 @@ public class ParentSavings extends Fragment {
             goal.setVisibility(View.INVISIBLE);
             edit.setText("CREATE");
         }
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         nameRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("savingsName");
         nameRef.addValueEventListener(new ValueEventListener() {
@@ -142,6 +141,9 @@ public class ParentSavings extends Fragment {
             }
         });
         balanceRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getUsername()).child("balance");
+        if (LoginActivity1.currentUser.getUserType().equals("parent")) {
+            balanceRef = database.getReference().child("userInfo").child(LoginActivity1.currentUser.getLinkedAccount()).child("balance");
+        }
         balanceRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -154,8 +156,14 @@ public class ParentSavings extends Fragment {
                     simpleProgressBar.setProgress((int)(fraction * 100));
                 }
                 if (number2 == number){
-                    Toast.makeText(getActivity(), "Congratulations! You've met your savings goal :)",
-                            Toast.LENGTH_SHORT).show();
+                    if (LoginActivity1.currentUser.getUserType().equals("parent")) {
+                        Toast.makeText(getActivity(), "Congratulations! " + LoginActivity1.currentUser.getLinkedAccount() + " has met their savings goal :)",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "Congratulations! You've met your savings goal :)",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
