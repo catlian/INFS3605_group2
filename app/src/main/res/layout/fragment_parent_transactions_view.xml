@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?actionBarSize"
-        app:tabBackground="@color/cardview_dark_background"
+        app:tabBackground="@color/custom_yellow"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorColor="@color/custom_grey"
         app:tabIndicatorHeight="4dp"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="#FFFFFF"
-        app:tabTextColor="#86FFFFFF">
+        app:tabSelectedTextColor="#000000"
+        app:tabTextColor="#000000">
 
     </com.google.android.material.tabs.TabLayout>
 

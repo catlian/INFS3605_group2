@@ -6,37 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".Activities.ProfileActivity">
 
-    <TextView
-        android:id="@+id/textView_setPic"
-        android:layout_width="173dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="296dp"
-        android:layout_marginStart="116dp"
-        android:fontFamily="@font/trebuchetms"
-        android:text="Lets set a profile picture!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/button_setPic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="184dp"
-        android:layout_marginStart="144dp"
+        android:layout_width="164dp"
+        android:layout_height="79dp"
+        android:background="@drawable/biggreenbutton"
         android:fontFamily="@font/helvetica"
         android:text="Set a picture"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.706" />
 
     <ImageView
         android:id="@+id/imageView_profilePic"
         android:layout_width="200dp"
         android:layout_height="193dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="124dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12"
         app:srcCompat="@drawable/boy" />
+
+    <TextView
+        android:id="@+id/textView_setPic"
+        android:layout_width="377dp"
+        android:layout_height="47dp"
+        android:fontFamily="@font/trebuchetms"
+        android:text="Lets set a profile picture!"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.453" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
