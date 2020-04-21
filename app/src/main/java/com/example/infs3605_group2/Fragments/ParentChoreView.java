@@ -123,7 +123,7 @@ public class ParentChoreView extends Fragment{
         final Spinner spinnerIcon = createChoreDialogView.findViewById(R.id.spinnerIcon);
 
         Integer[] ids = new Integer[]{1,2,3};
-
+      //  String[] ids = new String[]{"Cleaning","Sweeping","Washing"};
         ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>
                 (getContext(),android.R.layout.simple_spinner_item, ids);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
