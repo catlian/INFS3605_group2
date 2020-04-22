@@ -36,10 +36,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static androidx.core.app.NotificationCompat.DEFAULT_SOUND;
+import static androidx.core.app.NotificationCompat.DEFAULT_VIBRATE;
+
 public class ChildActivity extends AppCompatActivity  {
 
-    private Button btnLanding, btnLog, btnChore, btnSavings, btnVideos;
     private static ChildActivity mInstance;
+    private int initialCheck;
 
 
     public static void onFragmentInteraction(String string) {
@@ -55,9 +58,8 @@ public class ChildActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child);
-//        Bundle bundle = getIntent().getExtras();
-//        String message = bundle.getString("userType");
         mInstance = this;
+        initialCheck = 0;
         final ChildLanding landingFrag = new ChildLanding();
 
         swapFragment(landingFrag);
@@ -98,7 +100,14 @@ public class ChildActivity extends AppCompatActivity  {
         transactionRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                addNotification("transaction");
+                if (initialCheck == 2){
+                    addNotification("transaction");
+                }
+                else{
+                    initialCheck+=1;
+                    System.out.println(initialCheck);
+                }
+
             }
 
             @Override
@@ -173,8 +182,10 @@ public class ChildActivity extends AppCompatActivity  {
         NotificationManager notificationManager = this.getSystemService(NotificationManager.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             id = "dollaroo_channel";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            String description = "dollaroo";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(id, "DollarooChannel", importance);
+            channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             notificationManager.createNotificationChannel(channel);
@@ -192,7 +203,9 @@ public class ChildActivity extends AppCompatActivity  {
                     .setSmallIcon(R.drawable.kangarootwo)
                     .setContentTitle("You have just logged in")
                     .setContentText("Hi " + LoginActivity1.currentUser.getUsername() + ", please be careful of any strangers around you when using this app, stay safe!")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE)
+                    .setPriority(NotificationCompat.PRIORITY_MAX);
+
             notificationManager.notify(2 /* ID of notification */, builder.build());
         }
         else if(type.equals("transaction")){

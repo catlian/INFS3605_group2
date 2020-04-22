@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayoutTop"
             android:layout_width="match_parent"
@@ -48,6 +49,33 @@
                 app:srcCompat="@drawable/chores" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/choresTitles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutTop">
+
+            <TextView
+                android:id="@+id/txtNew"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="New Chores" />
+
+            <TextView
+                android:id="@+id/txtPending"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Waiting for Parent to Pay" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,14 +86,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerNewChores"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerPendingChores"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1" />
 
@@ -129,7 +157,7 @@
 
                 <TextView
                     android:id="@+id/txtDate"
-                    android:layout_width="0dp"
+                    android:layout_width="111dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="left"
@@ -167,5 +195,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+
 
 </FrameLayout>
