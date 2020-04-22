@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,27 +8,39 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/arial"
         android:gravity="center"
-        android:text="Confirm Payment" />
+        android:text="Confirm Payment"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout3">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Description:" />
+            android:fontFamily="@font/helvetica"
+            android:text="Description:"
+            tools:layout_conversion_absoluteHeight="16dp"
+            tools:layout_editor_absoluteY="23dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_conversion_absoluteWidth="214dp" />
 
         <TextView
             android:id="@+id/txtDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
+            android:fontFamily="@font/helvetica"
+            android:text="TextView"
+            tools:layout_conversion_absoluteHeight="16dp"
+            tools:layout_editor_absoluteY="23dp"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_conversion_absoluteWidth="198dp" />
 
     </LinearLayout>
 
@@ -41,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/helvetica"
             android:text="Amount:" />
 
         <TextView
@@ -48,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/helvetica"
             android:text="TextView" />
 
     </LinearLayout>
@@ -56,11 +71,21 @@
         android:id="@+id/btnSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send " />
+        android:background="@drawable/buttonyellowbig"
+        android:fontFamily="@font/helvetica"
+        android:text="Send "
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnCancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@android:string/cancel" />
+        android:background="@drawable/bigdarkbuton"
+        android:fontFamily="@font/helvetica"
+        android:text="@android:string/cancel"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </LinearLayout>
