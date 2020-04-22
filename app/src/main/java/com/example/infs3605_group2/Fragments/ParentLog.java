@@ -70,7 +70,7 @@ public class ParentLog extends Fragment {
                             1.0f);
                     TextView timestamp = new TextView(mContext);
                     timestamp.setText(transaction.getDate());
-                    timestamp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    timestamp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                     timestamp.setGravity(Gravity.CENTER);
                     timestamp.setLayoutParams(layoutParams);
 
@@ -78,15 +78,15 @@ public class ParentLog extends Fragment {
 
                     TextView description = new TextView(mContext);
                     description.setText(String.valueOf(transaction.getDescription()));
-                    description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                    description.setGravity(Gravity.CENTER);
+                    description.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                    description.setGravity(Gravity.LEFT);
                     description.setLayoutParams(layoutParams);
                     tbrow.addView(description);
 
                     TextView event = new TextView(mContext);
                     event.setText(String.valueOf(transaction.getEvent()));
-                    event.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-                    event.setGravity(Gravity.CENTER);
+                    event.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                    event.setGravity(Gravity.RIGHT);
                     event.setLayoutParams(layoutParams);
                     tbrow.addView(event);
 

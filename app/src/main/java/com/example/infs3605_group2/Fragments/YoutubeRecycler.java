@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class YoutubeRecycler extends Fragment implements GetVideoDetailsDelegate {
     private ArrayList<YoutubeModel> YoutubeModelArrayList = new ArrayList<>();
-    private Button gloss;
+//    private Button gloss;
 
     public YoutubeRecycler() {
         // Required empty public constructor
@@ -72,13 +72,13 @@ public class YoutubeRecycler extends Fragment implements GetVideoDetailsDelegate
     }
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
-        gloss = view.findViewById(R.id.button_glossary);
+/*        gloss = view.findViewById(R.id.button_glossary);
         gloss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), GlossaryActivity.class);
                 startActivity (intent);
             }
-        });
+        });*/
     }
 }

@@ -99,10 +99,10 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
             txtAmount.setText(String.valueOf(chore.getAmount()));
             txtAmount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             if(chore.getIsDone().equals("false")){
-                linearLayout.setBackgroundColor(Color.GRAY);
+                linearLayout.setBackgroundColor(Color.parseColor("#AAA498"));
             }
             else{
-                linearLayout.setBackgroundColor(Color.GREEN);
+                linearLayout.setBackgroundColor(Color.parseColor("#4CBB17"));
                 view.setOnClickListener(new View.OnClickListener() {
 
                     @Override

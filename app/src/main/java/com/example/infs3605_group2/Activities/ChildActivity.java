@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.infs3605_group2.Fragments.ChildChores;
 import com.example.infs3605_group2.Fragments.ChildLanding;
+import com.example.infs3605_group2.Fragments.ChildLearningMain;
 import com.example.infs3605_group2.Fragments.ChildLog;
 import com.example.infs3605_group2.Fragments.ParentSavings;
 import com.example.infs3605_group2.Fragments.QuizSettingFragment;
@@ -142,11 +143,11 @@ public class ChildActivity extends AppCompatActivity  {
                         break;
                     case R.id.gamesButton:
                         QuizSettingFragment quizSettingFragment = new QuizSettingFragment();
-                        swapFragment(quizSettingFragment); //TODO: change this to game activity once game is made
+                        swapFragment(quizSettingFragment);
                         break;
                     case R.id.learnButton:
-                        YoutubeRecycler videos = new YoutubeRecycler();
-                        swapFragment(videos);
+                        ChildLearningMain childLearningMain = new ChildLearningMain();
+                        swapFragment(childLearningMain);
                         break;
                 }
                 return true;
@@ -192,7 +193,7 @@ public class ChildActivity extends AppCompatActivity  {
                     .setContentTitle("You have just logged in")
                     .setContentText("Hi " + LoginActivity1.currentUser.getUsername() + ", please be careful of any strangers around you when using this app, stay safe!")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            notificationManager.notify(1 /* ID of notification */, builder.build());
+            notificationManager.notify(2 /* ID of notification */, builder.build());
         }
         else if(type.equals("transaction")){
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
@@ -200,7 +201,7 @@ public class ChildActivity extends AppCompatActivity  {
                     .setContentTitle("Balance Change")
                     .setContentText("Your balance has changed!")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            notificationManager.notify(1 /* ID of notification */, builder.build());
+            notificationManager.notify(3 /* ID of notification */, builder.build());
         }
 
     }

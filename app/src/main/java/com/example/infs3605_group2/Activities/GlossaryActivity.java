@@ -11,6 +11,6 @@ public class GlossaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_glossary);
+        setContentView(R.layout.fragment_child_glossary);
     }
 }

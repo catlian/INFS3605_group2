@@ -35,18 +35,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ParentActivity extends AppCompatActivity {
 
-
-//    private Button button;
-    private Button btnlog;
-    private Button btnChores;
-    private Button btnSavings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-//        Bundle bundle = getIntent().getExtras();
-//        String message = bundle.getString("userType");
-//        Toast.makeText(ParentActivity.this, message, Toast.LENGTH_SHORT).show();
 
         ParentLanding landingFrag = new ParentLanding();
         swapFragment(landingFrag);
@@ -61,9 +53,6 @@ public class ParentActivity extends AppCompatActivity {
                     case R.id.parentHomeButton:
                        ParentLanding landing = new ParentLanding();
                        swapFragment(landing);
-
-                        /* ParentTransactionMain landingFrag = new ParentTransactionMain();
-                        swapFragment(landingFrag);*/
                         break;
                     case R.id.parentSaveButton:
                         ParentSavings savings = new ParentSavings();
@@ -78,42 +67,6 @@ public class ParentActivity extends AppCompatActivity {
             }
         });
 
-
-//        button = findViewById(R.id.button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ParentOtherTransactions landingFrag = new ParentOtherTransactions();
-//                swapFragment(landingFrag);
-//            }
-//        });
-
-        /*
-        btnlog = findViewById(R.id.button2);
-        btnlog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParentLog log = new ParentLog();
-                swapFragment(log);
-            }
-        });
-        btnlog = findViewById(R.id.btnChores);
-        btnlog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParentTransactionMain parentTransactionMain = new ParentTransactionMain();
-                swapFragment(parentTransactionMain);
-            }
-        });
-
-        btnSavings = findViewById(R.id.btnSavingsGoal);
-        btnSavings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParentSavings savings = new ParentSavings();
-                swapFragment(savings);
-            }
-        });*/
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference choresRef = database.getReference().child("chores").
                 child(LoginActivity1.currentUser.getLinkedAccount());

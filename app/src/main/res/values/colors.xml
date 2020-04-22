@@ -6,4 +6,7 @@
     <color name="custom_grey">#3C3C3C</color>
     <color name="custom_green">#4CBB17</color>
     <color name="custom_yellow">#F9AC19</color>
+    <color name="child_yellow">#FFCF74</color>
+
+
 </resources>
