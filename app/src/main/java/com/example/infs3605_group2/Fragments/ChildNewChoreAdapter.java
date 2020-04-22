@@ -76,9 +76,12 @@ public class ChildNewChoreAdapter extends RecyclerView.Adapter<ChildNewChoreAdap
         public Button button;
         public LinearLayout linearLayout;
         public String iconNum;
-        public String vacuum ="https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/uploads%2Fvacuuming.png?alt=media&token=366dc917-0ca0-4bed-a28a-6062631013ea";
-        public String broom = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/uploads%2Fbroomstick.png?alt=media&token=20d78473-fd36-4c94-aef9-c927ab14f74d";
-        public String wash = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/uploads%2Fdishwashing.png?alt=media&token=acc63636-4bf2-44dc-bd59-689ab3ddc860";
+        public String wash = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/icons%2F17.png?alt=media&token=584c33fe-b090-4493-9e2e-444b523d01ac";
+        public String bed ="https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/icons%2F19.png?alt=media&token=f2269ec3-a3a7-4bb9-803b-9fc82ec7c2ef";
+        public String cleaning = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/icons%2F18.png?alt=media&token=f852be88-61f0-4617-805e-f914d83e871e";
+        public String garden = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/icons%2F25.png?alt=media&token=21438391-fe91-45b8-b68e-45b65405d2e8";
+        public String study = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/icons%2F16.png?alt=media&token=bea5896f-7ad6-4763-9310-d03b930e70ae";
+        public String trash = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/icons%2F23.png?alt=media&token=447d80e4-f230-4372-b8fe-63ffab49f732";
         // This constructor is used in onCreateViewHolder
         public ChoreViewHolder(View v) {
             super(v);  // runs the constructor for the ViewHolder superclass
@@ -107,13 +110,22 @@ public class ChildNewChoreAdapter extends RecyclerView.Adapter<ChildNewChoreAdap
             });
             switch (iconNum) {
                 case "Cleaning":
-                    Picasso.get().load(vacuum).into(icon);
+                    Picasso.get().load(cleaning).into(icon);
                     break;
-                case "Sweeping":
-                    Picasso.get().load(broom).into(icon);
+                case "Making Bed":
+                    Picasso.get().load(bed).into(icon);
                     break;
                 case "Washing":
                     Picasso.get().load(wash).into(icon);
+                    break;
+                case "Gardening":
+                    Picasso.get().load(garden).into(icon);
+                    break;
+                case "Studying":
+                    Picasso.get().load(study).into(icon);
+                    break;
+                case "Taking Trash":
+                    Picasso.get().load(trash).into(icon);
                     break;
             }
         }

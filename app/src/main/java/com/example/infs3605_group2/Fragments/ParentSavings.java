@@ -125,8 +125,17 @@ public class ParentSavings extends Fragment {
                 goal.setText("$" + goal1);
                 number = Integer.parseInt(goal1);
                 if (number != 0) {
-                    double fraction = number2/number;
-                    simpleProgressBar.setProgress((int)(fraction * 100));
+                    double fraction = ((number2/number) * 100);
+                    if (fraction >= 100){
+                        fraction = 100;
+                    }
+                    simpleProgressBar.setProgress((int)(fraction));
+                    if (LoginActivity1.currentUser.getUserType().equals("parent")) {
+                        progressMsg.setText(LoginActivity1.currentUser.getLinkedAccount() + "'s progress: " + Integer.toString((int)fraction) + "%");
+                    }
+                    else {
+                        progressMsg.setText("Your Progress: " + Integer.toString((int)fraction) + "%");
+                    }
                 }
 
             }
@@ -152,8 +161,19 @@ public class ParentSavings extends Fragment {
                     number = number2;
                 }*/
                 if (number != 0) {
-                    double fraction = number2/number;
-                    simpleProgressBar.setProgress((int)(fraction * 100));
+                    double fraction = ((number2/number) * 100);
+                    if (fraction >= 100){
+                        fraction = 100;
+                    }
+                    simpleProgressBar.setProgress((int) fraction);
+                       // progressMsg.append(": " + Integer.toString((int)fraction) + "%");
+                    if (LoginActivity1.currentUser.getUserType().equals("parent")) {
+                        progressMsg.setText(LoginActivity1.currentUser.getLinkedAccount() + "'s progress: " + Integer.toString((int)fraction) + "%");
+                    }
+                    else {
+                        progressMsg.setText("Your Progress: " + Integer.toString((int)fraction) + "%");
+                    }
+
                 }
                 if (number2 == number){
                     if (LoginActivity1.currentUser.getUserType().equals("parent")) {

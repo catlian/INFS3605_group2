@@ -22,7 +22,7 @@ public class ParentLanding extends Fragment {
     private TextView parentName2;
     private TextView parentBalance2;
     private TextView childBalance2;
-
+    private TextView childName2;
 
    /* private ImageView mImageView;
     private Uri imageUri;
@@ -58,6 +58,8 @@ public class ParentLanding extends Fragment {
         parentName2.setText(LoginActivity1.currentUser.getUsername()+":");
         parentBalance2 = view.findViewById(R.id.parentBalance2);
         childBalance2 = view.findViewById(R.id.childBalance2);
+        childName2 = view.findViewById(R.id.childName2);
+        childName2.setText(LoginActivity1.currentUser.getLinkedAccount()+":");
 
 
         /*
