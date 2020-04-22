@@ -24,8 +24,8 @@
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="952dp"
-        android:layout_height="155dp"
+        android:layout_width="943dp"
+        android:layout_height="211dp"
         android:layout_marginTop="144dp"
         android:gravity="center"
         android:inputType="textMultiLine"
