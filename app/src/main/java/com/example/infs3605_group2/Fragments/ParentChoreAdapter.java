@@ -77,19 +77,6 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
             txtChore = v.findViewById(R.id.txtChore);
             txtAmount = v.findViewById(R.id.txtAmount);
             linearLayout = v.findViewById(R.id.linearLayout);
-
-//            bookmarkImageView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if(isBookmarked) {
-//                        bookmarkImageView.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
-//                    } else {
-//                        bookmarkImageView.setImageResource(R.drawable.ic_bookmark_black_24dp);
-//                    }
-//                    isBookmarked = !isBookmarked;
-//                }
-//            });
-
         }
 
         // See comment in onBindViewHolder
