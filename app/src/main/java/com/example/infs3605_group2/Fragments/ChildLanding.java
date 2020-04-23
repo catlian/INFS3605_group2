@@ -113,7 +113,7 @@ public class ChildLanding extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 double childBalance = dataSnapshot.getValue(Long.class);
-                txtBalance.setText("$" + childBalance);
+                txtBalance.setText("$" + childBalance + "0");
             }
 
             @Override

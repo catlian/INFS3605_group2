@@ -96,7 +96,7 @@ public class ChildNewChoreAdapter extends RecyclerView.Adapter<ChildNewChoreAdap
         // See comment in onBindViewHolder
         public void bind(final Chore chore) {
             txtDescription.setText(chore.getDescription());
-            txtAmount.setText(String.valueOf(chore.getAmount()));
+            txtAmount.setText(String.valueOf(chore.getAmount()) + "0");
             //set icon
             iconNum = chore.getIcon();
             button.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +128,7 @@ public class ChildNewChoreAdapter extends RecyclerView.Adapter<ChildNewChoreAdap
                     Picasso.get().load(trash).into(icon);
                     break;
             }
+
         }
     }
 

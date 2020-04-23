@@ -108,7 +108,7 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
             TextView txtDesc = transactionDialogView.findViewById(R.id.txtDescription);
             txtDesc.setText(chore.getDescription());
             TextView txtAmount = transactionDialogView.findViewById(R.id.txtAmount);
-            txtAmount.setText(String.valueOf(chore.getAmount()));
+            txtAmount.setText(String.valueOf(chore.getAmount()) + "0");
 
             transactionDialogView.findViewById(R.id.btnSend).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -123,7 +123,7 @@ public class ParentChoreAdapter extends RecyclerView.Adapter<ParentChoreAdapter.
 
                     Transaction transaction = new Transaction();
                     transaction.setDescription(chore.getDescription());
-                    transaction.setEvent("+$" + chore.getAmount());
+                    transaction.setEvent("+$" + chore.getAmount() + "0");
                     DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
                     transaction.setDate(dateTimeFormat.format(LocalDateTime.now()));
                     transaction.setTime(-1 * new Date().getTime());

@@ -80,7 +80,7 @@ public class ParentOtherTransactions extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 childBalance = dataSnapshot.getValue(Long.class);
-                txtChildBalance.setText("$" + childBalance);
+                txtChildBalance.setText("$" + childBalance + "0");
             }
 
             @Override
@@ -96,7 +96,7 @@ public class ParentOtherTransactions extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 parentBalance = dataSnapshot.getValue(Long.class);
-                txtParentBalance.setText("$" + parentBalance);
+                txtParentBalance.setText("$" + parentBalance + "0");
             }
 
             @Override
