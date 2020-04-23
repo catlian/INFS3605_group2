@@ -26,7 +26,6 @@
         android:id="@+id/textView16"
         android:layout_width="943dp"
         android:layout_height="211dp"
-        android:layout_marginTop="144dp"
         android:gravity="center"
         android:inputType="textMultiLine"
         android:text="In a few years you might be starting to pay for things on your own. Do you know much you would have to pay for everyday objects? Test yourself now with 8 multiple choice questions. Press 'Start Quiz!' to begin."
@@ -34,9 +33,10 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.009" />
+        app:layout_constraintVertical_bias="0.326" />
 
     <Button
         android:id="@+id/btnStart"

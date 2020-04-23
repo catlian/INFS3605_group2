@@ -8,19 +8,19 @@
 
     <Button
         android:id="@+id/button_setPic"
-        android:layout_width="164dp"
-        android:layout_height="79dp"
+        android:layout_width="182dp"
+        android:layout_height="96dp"
         android:background="@drawable/biggreenbutton"
         android:fontFamily="@font/helvetica"
         android:text="Set a picture"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.706" />
+        app:layout_constraintVertical_bias="0.886" />
 
     <ImageView
         android:id="@+id/imageView_profilePic"
@@ -35,16 +35,16 @@
 
     <TextView
         android:id="@+id/textView_setPic"
-        android:layout_width="377dp"
-        android:layout_height="47dp"
+        android:layout_width="490dp"
+        android:layout_height="48dp"
         android:fontFamily="@font/trebuchetms"
-        android:text="Lets set a profile picture!"
+        android:text="Let's set a profile picture!"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.453" />
+        app:layout_constraintVertical_bias="0.576" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
