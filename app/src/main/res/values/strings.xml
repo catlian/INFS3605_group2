@@ -1,21 +1,4 @@
 <resources>
-    <string name="app_name">INFS3605_group2</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="thumbnail_image_view_desc">Youtube Video thumbnail image view</string>
-    <string name="question_string">What\'s the price of a</string>
-
-
-    <!--  we need to use video ids instead of video link  -->
-    <string-array name="video_id_array">
-        <item>geLkfMbPtNc</item>
-        <item>j1Cgn6nAoTE</item>
-        <item>Un9W8U0VRpY</item>
-        <item>6MsHNc7A_vY</item>
-
-    </string-array>
-
     <integer-array name="quiz_image_array">
         <item>@drawable/nintendoswitch</item>
         <item>@drawable/couch</item>
@@ -35,6 +18,23 @@
         <item>@drawable/tissuebox</item>
 
     </integer-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="thumbnail_image_view_desc">Youtube Video thumbnail image view</string>
+    <string name="question_string">What\'s the price of a</string>
+
+
+    <!--  we need to use video ids instead of video link  -->
+    <string name="app_name">INFS3605_group2</string>
+
+    <string-array name="video_id_array">
+        <item>geLkfMbPtNc</item>
+        <item>j1Cgn6nAoTE</item>
+        <item>Un9W8U0VRpY</item>
+        <item>6MsHNc7A_vY</item>
+
+    </string-array>
     <string-array name="quiz_object_array">
         <item>Nintendo Switch</item>
         <item>couch</item>

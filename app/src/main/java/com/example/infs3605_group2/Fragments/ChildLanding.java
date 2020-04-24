@@ -40,6 +40,8 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.infs3605_group2.R.drawable.*;
+import static com.example.infs3605_group2.R.drawable.koala;
 
 public class ChildLanding extends Fragment {
 
@@ -50,6 +52,12 @@ public class ChildLanding extends Fragment {
     private static final int IMAGE_REQUEST = 2;
     private DatabaseReference pictureRef;
     private String pic1;
+    private String platypus = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/profile%2F1.png?alt=media&token=c6d9043f-e653-493b-adc7-4a085a90e3be";
+    private String koala = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/profile%2F2.png?alt=media&token=ea57916b-3a45-4faf-945d-1b929cbdd767";
+    private String kangaroo = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/profile%2F3.png?alt=media&token=24ecd41b-aa45-42bd-b73c-59e9b1ad36a3";
+    private String bear = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/profile%2F4.png?alt=media&token=67907ed8-4085-4e7a-8d96-9b95e89fbd80";
+    private String chicken = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/profile%2Froastchicken.png?alt=media&token=1d2ac7b9-3594-43c8-8edf-abd320b896ac";
+
 
     private DatabaseReference childBalanceRef;
 
@@ -82,8 +90,23 @@ public class ChildLanding extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 pic1 = dataSnapshot.getValue(String.class);
-                Picasso.get().load(pic1).into(mImageView);
-                mImageView.setVisibility(View.VISIBLE);
+                switch (pic1) {
+                    case "koala":
+                        Picasso.get().load(koala).into(mImageView);
+                        break;
+                    case "platypus":
+                        Picasso.get().load(platypus).into(mImageView);
+                        break;
+                    case "kangaroo":
+                        Picasso.get().load(kangaroo).into(mImageView);
+                        break;
+                    case "chicken":
+                        Picasso.get().load(chicken).into(mImageView);
+                        break;
+                    case "bear":
+                        Picasso.get().load(bear).into(mImageView);
+                        break;
+                }
             }
 
             @Override
