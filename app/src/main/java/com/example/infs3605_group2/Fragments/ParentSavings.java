@@ -177,7 +177,7 @@ public class ParentSavings extends Fragment {
                     }
 
                 }
-                if (number2 == number){
+                if ((number2 == number) && (number2 != 0)){
                     if (LoginActivity1.currentUser.getUserType().equals("parent")) {
                         Toast.makeText(getActivity(), "Congratulations! " + LoginActivity1.currentUser.getLinkedAccount() + " has met their savings goal :)",
                                 Toast.LENGTH_SHORT).show();

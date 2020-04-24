@@ -57,7 +57,7 @@ public class ChildLanding extends Fragment {
     private String kangaroo = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/profile%2F3.png?alt=media&token=24ecd41b-aa45-42bd-b73c-59e9b1ad36a3";
     private String bear = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/profile%2F4.png?alt=media&token=67907ed8-4085-4e7a-8d96-9b95e89fbd80";
     private String chicken = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/profile%2Froastchicken.png?alt=media&token=1d2ac7b9-3594-43c8-8edf-abd320b896ac";
-
+    private String boy = "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/profile%2Fboy.png?alt=media&token=f356c89e-d9d7-4fe6-a4a9-70fa303f09e4";
 
     private DatabaseReference childBalanceRef;
 
@@ -105,6 +105,9 @@ public class ChildLanding extends Fragment {
                         break;
                     case "bear":
                         Picasso.get().load(bear).into(mImageView);
+                        break;
+                    case "default":
+                        Picasso.get().load(boy).into(mImageView);
                         break;
                 }
             }

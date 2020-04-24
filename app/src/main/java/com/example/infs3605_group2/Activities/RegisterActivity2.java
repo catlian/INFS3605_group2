@@ -54,6 +54,7 @@ public class RegisterActivity2 extends AppCompatActivity {
                     child_map.put("userType", "child");
                     child_map.put("balance", 0);
                     child_map.put("savingsGoal", "0");
+                    child_map.put("profileImage", "default");
                     child_map.put("savingsGoalPic", "https://firebasestorage.googleapis.com/v0/b/infs3605-test-c0bd9.appspot.com/o/uploads%2Findex.png?alt=media&token=18987ce5-e0a1-4a10-b249-aad283bdf8e0");
                     parent_map.put("password", parent_password);
                     parent_map.put("linkedAccount", user_text);
