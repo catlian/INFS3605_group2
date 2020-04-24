@@ -153,7 +153,7 @@ public class QuizActivity extends AppCompatActivity{
         if(questionCount < questionListSize){
             btnConfirm.setText("Next");
         }else{
-            btnConfirm.setText("Save Results");
+            btnConfirm.setText("Finish Quiz");
         }
     }
 
