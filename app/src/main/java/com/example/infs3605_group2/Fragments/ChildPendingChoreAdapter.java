@@ -17,14 +17,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.example.infs3605_group2.R.drawable.cleaning;
+/*import static com.example.infs3605_group2.R.drawable.cleaning;*/
 
 public class ChildPendingChoreAdapter extends RecyclerView.Adapter<ChildPendingChoreAdapter.ChoreViewHolder>{
     private List<Chore> choresToAdapt;
 
-//    public void setData(List<Chore> choresToAdapt) {
-//        this.choresToAdapt = choresToAdapt;
-//    }
     public ChildPendingChoreAdapter(List<Chore> choresToAdapt) {
         this.choresToAdapt = choresToAdapt;
     }
@@ -80,7 +77,7 @@ public class ChildPendingChoreAdapter extends RecyclerView.Adapter<ChildPendingC
         // See comment in onBindViewHolder
         public void bind(final Chore chore) {
             txtDescription.setText(chore.getDescription());
-            txtAmount.setText(String.valueOf(chore.getAmount()) + "0");
+            txtAmount.setText("$" + chore.getAmount() + "0");
             //set icon
             iconNum = chore.getIcon();
             switch (iconNum) {

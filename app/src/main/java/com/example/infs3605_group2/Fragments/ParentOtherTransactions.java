@@ -126,7 +126,7 @@ public class ParentOtherTransactions extends Fragment {
                                 Toast.LENGTH_SHORT).show();
                         pushTransaction("+");
                     } else {
-                        Toast.makeText(getActivity(), "mum u need more money",
+                        Toast.makeText(getActivity(), "Not enough money in account",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -153,7 +153,7 @@ public class ParentOtherTransactions extends Fragment {
                         Toast.makeText(getActivity(), "Money Retrieved",
                                 Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getActivity(), "mum ur kid doesnt even have that much??",
+                        Toast.makeText(getActivity(), "Not enough money in account",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }

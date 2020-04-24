@@ -35,6 +35,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static androidx.core.app.NotificationCompat.DEFAULT_SOUND;
 import static androidx.core.app.NotificationCompat.DEFAULT_VIBRATE;
@@ -42,7 +43,11 @@ import static androidx.core.app.NotificationCompat.DEFAULT_VIBRATE;
 public class ChildActivity extends AppCompatActivity  {
 
     private static ChildActivity mInstance;
-    private int initialCheck;
+    private long initialChoreCheck;
+    private long initialTransactCheck;
+    private int transact;
+    private int chore;
+
 
 
     public static void onFragmentInteraction(String string) {
@@ -59,70 +64,94 @@ public class ChildActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child);
         mInstance = this;
-        initialCheck = 0;
+        transact = 0;
+        chore = 0;
         final ChildLanding landingFrag = new ChildLanding();
 
         swapFragment(landingFrag);
         addNotification("login");
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference choresRef = database.getReference().child("chores").
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference choresRef = database.getReference().child("chores").
                 child(LoginActivity1.currentUser.getUsername());
-        choresRef.addChildEventListener(new ChildEventListener() {
+        choresRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                addNotification("chore");
-            }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                initialChoreCheck= dataSnapshot.getChildrenCount();
+                choresRef.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        if (chore > initialChoreCheck - 1 ){
+                            addNotification("chore");
+                        }
+                        else { chore += 1;}
+                    }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            }
+                    }
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-            }
+                    }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
         });
 
-        DatabaseReference transactionRef = database.getReference().child("transactions").
+        final DatabaseReference transactionRef = database.getReference().child("transactions").
                 child(LoginActivity1.currentUser.getUsername());
-        transactionRef.addChildEventListener(new ChildEventListener() {
+        transactionRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if (initialCheck == 2){
-                    addNotification("transaction");
-                }
-                else{
-                    initialCheck+=1;
-                    System.out.println(initialCheck);
-                }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                initialTransactCheck= dataSnapshot.getChildrenCount();
+                System.out.println(initialTransactCheck + "init");
+                transactionRef.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        System.out.println("transact" + transact);
+                        if (transact > initialTransactCheck - 1 ){
+                            System.out.println(transact);
+                            addNotification("transaction");
+                        }
+                        else { transact += 1;}
+                    }
 
-            }
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    }
 
-            }
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                    }
 
-            }
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
@@ -176,8 +205,6 @@ public class ChildActivity extends AppCompatActivity  {
     }
     //https://developer.android.com/training/notify-user/build-notification
     public void addNotification(String type) {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
         String id = "";
         NotificationManager notificationManager = this.getSystemService(NotificationManager.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -186,8 +213,6 @@ public class ChildActivity extends AppCompatActivity  {
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(id, "DollarooChannel", importance);
             channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
             notificationManager.createNotificationChannel(channel);
         }
         if(type.equals("chore")){
@@ -196,17 +221,19 @@ public class ChildActivity extends AppCompatActivity  {
                     .setContentTitle("New Chore")
                     .setContentText(LoginActivity1.currentUser.getLinkedAccount() + " has added a new chore!")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            notificationManager.notify(1 /* ID of notification */, builder.build());
+            notificationManager.notify(1, builder.build());
+            Toast.makeText(this, LoginActivity1.currentUser.getLinkedAccount() + " has added a new chore!",
+                    Toast.LENGTH_LONG).show();
         }
         if(type.equals("login")){
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
                     .setSmallIcon(R.drawable.kangarootwo)
                     .setContentTitle("You have just logged in")
-                    .setContentText("Hi " + LoginActivity1.currentUser.getUsername() + ", please be careful of any strangers around you when using this app, stay safe!")
-                    .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText("Hi " + LoginActivity1.currentUser.getUsername() + ", please be careful of any strangers around you when using this app, stay safe!"))
                     .setPriority(NotificationCompat.PRIORITY_MAX);
-
-            notificationManager.notify(2 /* ID of notification */, builder.build());
+            notificationManager.notify(2, builder.build());
+            Toast.makeText(this, "Make sure no strangers can see your screen!",
+                    Toast.LENGTH_LONG).show();
         }
         else if(type.equals("transaction")){
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
@@ -214,7 +241,9 @@ public class ChildActivity extends AppCompatActivity  {
                     .setContentTitle("Balance Change")
                     .setContentText("Your balance has changed!")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            notificationManager.notify(3 /* ID of notification */, builder.build());
+            notificationManager.notify(3, builder.build());
+            Toast.makeText(this, "Your balance has changed!",
+                    Toast.LENGTH_LONG).show();
         }
 
     }

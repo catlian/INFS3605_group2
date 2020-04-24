@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.infs3605_group2.Fragments.ChildChores;
 import com.example.infs3605_group2.Fragments.ChildLog;
@@ -107,16 +108,12 @@ public class ParentActivity extends AppCompatActivity {
     }
     //https://developer.android.com/training/notify-user/build-notification
     public void addNotification() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
         String id = "";
         NotificationManager notificationManager = this.getSystemService(NotificationManager.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             id = "dollaroo_channel";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(id, "DollarooChannel", importance);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
             notificationManager.createNotificationChannel(channel);
         }
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
@@ -124,7 +121,10 @@ public class ParentActivity extends AppCompatActivity {
                 .setContentTitle("Chore Completed")
                 .setContentText(LoginActivity1.currentUser.getLinkedAccount() + " has marked a chore as done." +
                         "Check to see if it is!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        notificationManager.notify(1 /* ID of notification */, builder.build());
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
+        notificationManager.notify(1, builder.build());
+        Toast.makeText(this, LoginActivity1.currentUser.getLinkedAccount() + " has marked a chore as done." +
+                        "Check to see if it is!",
+                Toast.LENGTH_LONG).show();
     }
 }

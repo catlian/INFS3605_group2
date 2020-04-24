@@ -96,7 +96,7 @@ public class ChildNewChoreAdapter extends RecyclerView.Adapter<ChildNewChoreAdap
         // See comment in onBindViewHolder
         public void bind(final Chore chore) {
             txtDescription.setText(chore.getDescription());
-            txtAmount.setText(String.valueOf(chore.getAmount()) + "0");
+            txtAmount.setText("$" + chore.getAmount() + "0");
             //set icon
             iconNum = chore.getIcon();
             button.setOnClickListener(new View.OnClickListener() {

@@ -65,7 +65,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="New Chores" />
+                android:text="New Chores"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtPending"
@@ -74,7 +76,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="Waiting for Parent to Pay" />
+                android:text="Waiting for Parent to Pay"
+                android:textSize="18dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -157,12 +161,14 @@
 
                 <TextView
                     android:id="@+id/txtDate"
-                    android:layout_width="111dp"
+                    android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="left"
                     android:padding="8dp"
-                    android:text="Date " />
+                    android:text="Date "
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtDescription"
@@ -171,7 +177,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:text="Description " />
+                    android:text="Description "
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtAmount"
@@ -180,7 +188,9 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:padding="8dp"
-                    android:text="Amount" />
+                    android:text="Amount"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

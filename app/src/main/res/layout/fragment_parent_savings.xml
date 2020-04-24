@@ -70,7 +70,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/helvetica"
         android:text="Savings Goal"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +83,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/helvetica"
         android:text="Amount"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,12 +104,14 @@
     <ProgressBar
         android:id="@+id/simpleProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="327dp"
+        android:layout_width="290dp"
         android:layout_height="38dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginBottom="28dp"
         android:max="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textView22"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -124,5 +126,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.871" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="@font/helvetica"
+        android:text="$0"
+        android:textAlignment="viewEnd"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/simpleProgressBar" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="@font/helvetica"
+        android:text="TextView"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/simpleProgressBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

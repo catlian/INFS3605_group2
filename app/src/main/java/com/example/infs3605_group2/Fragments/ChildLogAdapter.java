@@ -65,7 +65,7 @@ public class ChildLogAdapter extends RecyclerView.Adapter<ChildLogAdapter.LogVie
         public void bind (final Transaction transaction){
             txtDate.setText(transaction.getDate());
             txtDescription.setText(transaction.getDescription());
-            txtAmount.setText(transaction.getEvent());
+            txtAmount.setText(transaction.getEvent() + "0");
         }
     }
 }

@@ -10,9 +10,10 @@
         android:id="@+id/txtDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.4"
         android:padding="8dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/txtDescription"
@@ -21,7 +22,8 @@
         android:layout_weight="1"
         android:gravity="center"
         android:padding="8dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/txtAmount"
@@ -30,5 +32,6 @@
         android:layout_weight="1"
         android:gravity="end"
         android:padding="8dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="18dp" />
 </LinearLayout>

@@ -84,7 +84,7 @@ public class ParentLog extends Fragment {
                     tbrow.addView(description);
 
                     TextView event = new TextView(mContext);
-                    event.setText(String.valueOf(transaction.getEvent()));
+                    event.setText(transaction.getEvent() + "0");
                     event.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                     event.setGravity(Gravity.RIGHT);
                     event.setLayoutParams(layoutParams);

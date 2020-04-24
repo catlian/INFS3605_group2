@@ -53,6 +53,7 @@ public class ParentSavings extends Fragment {
     private double number;
     private double number2;
     private TextView progressMsg;
+    private TextView goalBar;
     public ParentSavings() {
         // Required empty public constructor
     }
@@ -72,7 +73,7 @@ public class ParentSavings extends Fragment {
     }
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-
+        goalBar = view.findViewById(R.id.textView23);
         edit = view.findViewById(R.id.btnCreate);
         name = view.findViewById(R.id.textView_name);
         goal = view.findViewById(R.id.textView_amount);
@@ -122,7 +123,8 @@ public class ParentSavings extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 goal1 = dataSnapshot.getValue(String.class);
-                goal.setText("$" + goal1);
+                goal.setText("$" + goal1 +".00");
+                goalBar.setText("$" + goal1);
                 number = Integer.parseInt(goal1);
                 if (number != 0) {
                     double fraction = ((number2/number) * 100);
